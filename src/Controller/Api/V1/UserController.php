@@ -18,7 +18,7 @@ class UserController extends AbstractController
 {
     /**
      * URL : /api/v1/users
-     * @Route : api_v1_user_index
+     * Route : api_v1_user_index
      * 
      * @Route("/", name="index", methods={"GET"})
      */
@@ -53,23 +53,30 @@ class UserController extends AbstractController
      /**
      * 
      * URL : /api/v1/users/
+     *
      * 
      * @Route("/", name="add", methods={"POST"})
      * 
-     * @return void
+     * 
      */
     public function add(Request $request, SerializerInterface $serialiser, ValidatorInterface $validator)
     {
         // We get the json information
         $jsonData = $request->getContent();
 
+        
+
         //We turn json data in object
-        $user = $serialiser->deserialize($jsonData, User::class, 'json');
+        $user = $serialiser->deserialize($jsonData, User::class, 'json');        
+        
+        // dd($user);
 
         //To save we call the manager
         $em = $this->getDoctrine()->getManager();
         $em->persist($user);
         $em->flush();
+
+        // dd($jsonData, $user);
 
         //We return an answer telling the ressource has been created with the 201 code.
         return $this->json($user, 201, [], []);
