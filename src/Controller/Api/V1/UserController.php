@@ -25,4 +25,12 @@ class UserController extends AbstractController
             'path' => 'src/Controller/Api/V1/UserController.php',
         ]);
     }
+
+    public function show(): Response
+    {
+        return $this->json([
+            'message' => 'Welcome to your new controller!',
+            'path' => 'src/Controller/Api/V1/UserController.php',
+        ]);
+    }
 }
