@@ -3,9 +3,7 @@
 namespace App\Controller\Api\V1;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-
+use Symfony\C
 
 /**
  * @Route("/api/v1/users", name="api_v1_user")
@@ -34,3 +32,19 @@ class UserController extends AbstractController
         ]);
     }
 }
+/**  *@ORM\Column(type="string", length=64, nullable=true)
+     */
+    private $category;
+
+    public function getCategory(): ?string{
+        return $this->category;
+    }
+
+    setCateory(?string $catgory): self
+    {
+        $his->category = $category;
+
+        return $this;
+    }
+
+    public function get
