@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -101,6 +103,40 @@ class User
      * @ORM\Column(type="datetime_immutable", nullable=true)
      */
     private $updatedAt;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Event::class, mappedBy="user", orphanRemoval=true)
+     */
+    private $events;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Category::class, inversedBy="users")
+     */
+    private $category;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Style::class, inversedBy="users")
+     */
+    private $style;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="user")
+     */
+    private $comment;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Participation::class, mappedBy="user", orphanRemoval=true)
+     */
+    private $participation;
+
+    public function __construct()
+    {
+        $this->events = new ArrayCollection();
+        $this->category = new ArrayCollection();
+        $this->style = new ArrayCollection();
+        $this->comment = new ArrayCollection();
+        $this->participation = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -307,6 +343,144 @@ class User
     public function setUpdatedAt(?\DateTimeImmutable $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Event[]
+     */
+    public function getEvents(): Collection
+    {
+        return $this->events;
+    }
+
+    public function addEvent(Event $event): self
+    {
+        if (!$this->events->contains($event)) {
+            $this->events[] = $event;
+            $event->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEvent(Event $event): self
+    {
+        if ($this->events->removeElement($event)) {
+            // set the owning side to null (unless already changed)
+            if ($event->getUser() === $this) {
+                $event->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Category[]
+     */
+    public function getCategory(): Collection
+    {
+        return $this->category;
+    }
+
+    public function addCategory(Category $category): self
+    {
+        if (!$this->category->contains($category)) {
+            $this->category[] = $category;
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(Category $category): self
+    {
+        $this->category->removeElement($category);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Style[]
+     */
+    public function getStyle(): Collection
+    {
+        return $this->style;
+    }
+
+    public function addStyle(Style $style): self
+    {
+        if (!$this->style->contains($style)) {
+            $this->style[] = $style;
+        }
+
+        return $this;
+    }
+
+    public function removeStyle(Style $style): self
+    {
+        $this->style->removeElement($style);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComment(): Collection
+    {
+        return $this->comment;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comment->contains($comment)) {
+            $this->comment[] = $comment;
+            $comment->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comment->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getUser() === $this) {
+                $comment->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Participation[]
+     */
+    public function getParticipation(): Collection
+    {
+        return $this->participation;
+    }
+
+    public function addParticipation(Participation $participation): self
+    {
+        if (!$this->participation->contains($participation)) {
+            $this->participation[] = $participation;
+            $participation->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeParticipation(Participation $participation): self
+    {
+        if ($this->participation->removeElement($participation)) {
+            // set the owning side to null (unless already changed)
+            if ($participation->getUser() === $this) {
+                $participation->setUser(null);
+            }
+        }
 
         return $this;
     }
