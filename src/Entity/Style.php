@@ -6,6 +6,7 @@ use App\Repository\StyleRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=StyleRepository::class)
@@ -16,11 +17,15 @@ class Style
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * 
+     * @Groups({"users_list", "user_detail"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=64)
+     * 
+     * @Groups({"users_list", "user_detail"})
      */
     private $name;
 
@@ -41,11 +46,15 @@ class Style
 
     /**
      * @ORM\ManyToMany(targetEntity=Event::class, mappedBy="style")
+     * 
+     * @Groups({"users_list", "user_detail"})
      */
     private $events;
 
     /**
      * @ORM\ManyToMany(targetEntity=User::class, mappedBy="style")
+     * 
+     * @Groups({"users_list", "user_detail"})
      */
     private $users;
 
