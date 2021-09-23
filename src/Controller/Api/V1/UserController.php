@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
@@ -81,7 +82,75 @@ class UserController extends AbstractController
         //We return an answer telling the ressource has been created with the 201 code.
         return $this->json($user, 201, [], []);
 
-    
+    }
+
+        /**
+     * User update according to the id
+     * 
+     * @Route("/{id}", name="update", methods={"PUT", "PATCH"})
+     *
+     * @return void
+     */
+    public function update(int $id, UserRepository $userRepository, Request $request, SerializerInterface $serialiser)
+    {
+        // On récupère les données reçues au format JSON
+        $jsonData = $request->getContent();
+
+        // On récupère la série dont l'ID est $id
+        $user = $userRepository->find($id);
+
+        if (!$user) {
+            // if the user doesn't exist
+            // We retrune the 404 page not found
+            return $this->json(
+                [
+                    'errors' => [
+                        'message' => 'L\'utilisateur ' . $id . ' n\'existe pas'
+                    ]
+                ],
+                404
+            );
+        }
+
+
+        $serialiser->deserialize($jsonData, User::class, 'json', [AbstractNormalizer::OBJECT_TO_POPULATE => $user]);
+
+        // We call the manager to update de database
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();
+
+        return $this->json([
+            'message' => 'L\'utilisateur ' . $user->getName() . ' a bien été mise à jour'
+        ]);
+    }
+
+    /**
+     * @Route("/{id}", name="delete", methods={"DELETE"})
+     *
+     * @return JsonResponse
+     */
+    public function delete(int $id, UserRepository $userRepository)
+    {
+        $user = $userRepository->find($id);
+
+        if (!$user) {
+            // The user doesn't exist
+            return $this->json(
+                [
+                    'errors' => ['message' => 'L\'utilisateur ' . $id . ' n\'existe pas']
+                ],
+                404
+            );
+        }
+
+        // We call the manager to delete the selected user
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($user);
+        $em->flush();
+
+        return $this->json([
+            'message' => 'L\'utilisateur ' . $user->getName() . ' a bien été supprimée'
+        ]);
     }
 
 }
