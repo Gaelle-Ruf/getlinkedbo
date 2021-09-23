@@ -3,9 +3,12 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -16,116 +19,162 @@ class User
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * 
+     * @Groups({"users_list", "user_detail"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=64)
+     * 
+     * @Groups({"users_list", "user_detail"})
      */
     private $type;
 
     /**
      * @ORM\Column(type="string", length=128)
+     * 
+     * @Groups({"users_list", "user_detail"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=64)
+     * 
+     * @Groups({"users_list", "user_detail"})
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=64)
+     * 
+     * @Groups({"users_list", "user_detail"})
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * 
+     * @Groups({"users_list", "user_detail"})
      */
     private $picture;
 
     /**
      * @ORM\Column(type="text")
+     * 
+     * @Groups({"users_list", "user_detail"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="date", nullable=true)
+     * 
+     * @Groups({"users_list", "user_detail"})
      */
     private $schedule;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * 
+     * @Groups({"users_list", "user_detail"})
      */
     private $nbMembers;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * 
+     * @Groups({"users_list", "user_detail"})
      */
     private $address;
 
     /**
      * @ORM\Column(type="string", length=128, nullable=true)
+     * 
+     * @Groups({"users_list", "user_detail"})
      */
     private $website;
 
     /**
      * @ORM\Column(type="string", length=128, nullable=true)
+     * 
+     * @Groups({"users_list", "user_detail"})
      */
     private $facebook;
 
     /**
      * @ORM\Column(type="string", length=128, nullable=true)
+     * 
+     * @Groups({"users_list", "user_detail"})
      */
     private $instagram;
 
     /**
      * @ORM\Column(type="string", length=128, nullable=true)
+     * 
+     * @Groups({"users_list", "user_detail"})
      */
     private $twitter;
 
     /**
      * @ORM\Column(type="string", length=128)
+     * 
+     * @Groups({"users_list", "user_detail"})
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=128, nullable=true)
+     * 
+     * @Groups({"users_list", "user_detail"})
      */
     private $slug;
 
     /**
      * @ORM\Column(type="datetime_immutable", nullable=true)
+     * 
+     * @Groups({"users_list", "user_detail"})
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime_immutable", nullable=true)
+     * 
+     * @Groups({"users_list", "user_detail"})
      */
     private $updatedAt;
 
     /**
      * @ORM\OneToMany(targetEntity=Event::class, mappedBy="user", orphanRemoval=true)
+     * 
+     * @Groups({"users_list", "user_detail"})
      */
     private $events;
 
     /**
      * @ORM\ManyToMany(targetEntity=Category::class, inversedBy="users")
+     * 
+     * @Groups({"users_list", "user_detail"})
      */
     private $category;
 
     /**
      * @ORM\ManyToMany(targetEntity=Style::class, inversedBy="users")
+     * 
+     * @Groups({"users_list", "user_detail"})
      */
     private $style;
 
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="user")
+     * 
+     * @Groups({"users_list", "user_detail"})
      */
     private $comment;
 
     /**
      * @ORM\OneToMany(targetEntity=Participation::class, mappedBy="user", orphanRemoval=true)
+     * 
+     * @Groups({"users_list", "user_detail"})
      */
     private $participation;
 
