@@ -6,15 +6,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class BackofficeController extends AbstractController
+class CommentController extends AbstractController
 {
     /**
-     * @Route("/backoffice/", name="backoffice_index")
+     * @Route("/backoffice/comment", name="backoffice_comment")
      */
     public function index(): Response
     {
-        return $this->render('backoffice/index.html.twig', [
-            'controller_name' => 'BackofficeController',
+        return $this->render('backoffice/comment/index.html.twig', [
+            'controller_name' => 'CommentController',
         ]);
     }
 }
