@@ -83,7 +83,7 @@ class UserController extends AbstractController
 
     }
 
-        /**
+    /**
      * User update according to the id
      * 
      * @Route("/{id}", name="update", methods={"PUT", "PATCH"})

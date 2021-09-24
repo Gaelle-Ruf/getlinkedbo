@@ -111,7 +111,7 @@ class Event
     private $updatedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="events")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="events", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      * 
      * @Groups({"events_list", "event_detail"})

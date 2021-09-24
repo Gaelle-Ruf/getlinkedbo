@@ -69,8 +69,8 @@ class EventController extends AbstractController
         
 
         //We turn json data in object
-        $event = $serialiser->deserialize($jsonData, Event::class, 'json');        
-        
+        $event = $serialiser->deserialize($jsonData, Event::class, 'json');       
+
         // dd($event);
 
         //To save we call the manager
@@ -81,7 +81,7 @@ class EventController extends AbstractController
         // dd($jsonData, $event);
 
         //We return an answer telling the ressource has been created with the 201 code.
-        return $this->json($event, 201, [], []);
+        return $this->json($event, 201, [], ['groups' => 'event_detail']);
 
     }
 
@@ -154,4 +154,5 @@ class EventController extends AbstractController
         ]);
     }
 
+    
 }
