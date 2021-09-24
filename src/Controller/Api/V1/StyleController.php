@@ -83,7 +83,7 @@ class StyleController extends AbstractController
     }
 
     /**
-     * User update according to the id
+     * Style update according to the id
      * 
      * @Route("/{id}", name="update", methods={"PUT", "PATCH"})
      *
@@ -122,7 +122,7 @@ class StyleController extends AbstractController
         ]);
     }
 
-      /**
+    /**
      * @Route("/{id}", name="delete", methods={"DELETE"})
      *
      * @return JsonResponse
@@ -141,7 +141,7 @@ class StyleController extends AbstractController
             );
         }
 
-        // We call the manager to delete the selected category
+        // We call the manager to delete the selected style
         $em = $this->getDoctrine()->getManager();
         $em->remove($style);
         $em->flush();

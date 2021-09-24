@@ -87,7 +87,7 @@ class CategoryController extends AbstractController
 
     }
     /**
-     * User update according to the id
+     * Category update according to the id
      * 
      * @Route("/{id}", name="update", methods={"PUT", "PATCH"})
      *
