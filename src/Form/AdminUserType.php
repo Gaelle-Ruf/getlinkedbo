@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\AdminUser;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -17,7 +18,7 @@ class AdminUserType extends AbstractType
         $builder
             ->add('email')
             ->add('roles', 
-                Choicetype::class, 
+                ChoiceType::class, 
                 [   'choices' => [
                         'ROLE_ADMINUSER' => 'ROLE_ADMINUSER',
                         'ROLE_ADMIN' => 'ROLE_ADMIN',
@@ -53,7 +54,7 @@ class AdminUserType extends AbstractType
                     'mapped' => false
                 ]);
             }
-            dd($adminuser, $form);
+            /* dd($adminuser, $form); */
         });
     }
     

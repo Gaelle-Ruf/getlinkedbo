@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\AdminUserRepository;
 use DateTimeImmutable;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -11,7 +12,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=AdminUserRepository::class)
- * @UniqueEntity(fields={"email"}, message="Il existe déjà un compte avec cet E-mail")
+ * @UniqueEntity(fields={"email"}, message="Il existe déjà un compte avec cet Email")
  */
 class AdminUser implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -64,7 +65,8 @@ class AdminUser implements UserInterface, PasswordAuthenticatedUserInterface
     private $isVerified = false;
 
     public function __construct()
-    {
+    { 
+        
         $this->createdAt = new DateTimeImmutable();
     }
 
@@ -108,12 +110,9 @@ class AdminUser implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getRoles(): array
     {
-        // On récupère les roles associés à l'utilisateur
-        // Pour demo2, $roles = [];
-        // Pour adrien, $roles = ["ROLE_ADMIN"];
         $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER'; // ["ROLE_ADMIN", "ROLE_USER"]
+        // guarantee every user at least has ROLE_ADMINUSER
+        $roles[] = 'ROLE_ADMINUSER';
 
         return array_unique($roles);
     }
