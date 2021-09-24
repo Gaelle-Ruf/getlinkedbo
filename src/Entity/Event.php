@@ -6,6 +6,7 @@ use App\Repository\EventRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
@@ -18,6 +19,7 @@ class Event
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      * 
+     * @Groups({"events_list", "event_detail"})
      * @Groups({"users_list", "user_detail"})
      */
     private $id;
@@ -25,6 +27,7 @@ class Event
     /**
      * @ORM\Column(type="string", length=128)
      * 
+     * @Groups({"events_list", "event_detail"})
      * @Groups({"users_list", "user_detail"})
      */
     private $name;
@@ -32,98 +35,114 @@ class Event
     /**
      * @ORM\Column(type="text")
      * 
-     * @Groups({"users_list", "user_detail"})
+     * @Groups({"events_list", "event_detail"})
      */
     private $location;
 
     /**
      * @ORM\Column(type="datetime_immutable")
      * 
-     * @Groups({"users_list", "user_detail"})
+     * @Groups({"events_list", "event_detail"})
      */
     private $date;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * 
-     * @Groups({"users_list", "user_detail"})
+     * @Groups({"events_list", "event_detail"})
      */
     private $picture;
 
     
     /**
      * @ORM\Column(type="text")
+     * 
+     * @Groups({"events_list", "event_detail"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="decimal", precision=8, scale=2, nullable=true)
+     * 
+     * @Groups({"events_list", "event_detail"})
      */
     private $price;
 
     /**
      * @ORM\Column(type="time", nullable=true)
+     * 
+     * @Groups({"events_list", "event_detail"})
      */
     private $duration;
 
     /**
      * @ORM\Column(type="string", length=128)
      * 
-     * @Groups({"users_list", "user_detail"})
+     * @Groups({"events_list", "event_detail"})
      */
     private $email;
 
     /**
      * @ORM\Column(type="datetime_immutable", nullable=true)
+     * 
+     * @Groups({"events_list", "event_detail"})
      */
     private $publishedAt;
 
     /**
      * @ORM\Column(type="string", length=128, nullable=true)
+     * 
+     * @Groups({"events_list", "event_detail"})
      */
     private $slug;
 
     /**
      * @ORM\Column(type="datetime_immutable", nullable=true)
+     * 
+     * @Groups({"events_list", "event_detail"})
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime_immutable", nullable=true)
+     * 
+     * @Groups({"events_list", "event_detail"})
      */
     private $updatedAt;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="events")
      * @ORM\JoinColumn(nullable=false)
+     * 
+     * @Groups({"events_list", "event_detail"})
      */
     private $user;
 
     /**
      * @ORM\ManyToMany(targetEntity=Category::class, inversedBy="events")
      * 
-     * @Groups({"users_list", "user_detail"})
+     * @Groups({"events_list", "event_detail"})
      */
     private $category;
 
     /**
      * @ORM\ManyToMany(targetEntity=Style::class, inversedBy="events")
      * 
-     * @Groups({"users_list", "user_detail"})
+     * @Groups({"events_list", "event_detail"})
      */
     private $style;
 
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="event")
      * 
-     * @Groups({"users_list", "user_detail"})
+     * @Groups({"events_list", "event_detail"})
      */
     private $comment;
 
     /**
      * @ORM\OneToMany(targetEntity=Participation::class, mappedBy="event", orphanRemoval=true)
      * 
-     * @Groups({"users_list", "user_detail"})
+     * @Groups({"events_list", "event_detail"})
      */
     private $participation;
 

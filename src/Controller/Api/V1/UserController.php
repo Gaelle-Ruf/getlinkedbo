@@ -29,7 +29,6 @@ class UserController extends AbstractController
         $users = $userRepository->findAll();
         // dd($users);
         return $this->json($users, 200, [], ['groups' => 'users_list']
-        
     );
     }
 
@@ -93,10 +92,10 @@ class UserController extends AbstractController
      */
     public function update(int $id, UserRepository $userRepository, Request $request, SerializerInterface $serialiser)
     {
-        // On récupère les données reçues au format JSON
+        // We get datas reveived in JSON format
         $jsonData = $request->getContent();
 
-        // On récupère la série dont l'ID est $id
+        // We get the user for whom the ID is $id
         $user = $userRepository->find($id);
 
         if (!$user) {

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ParticipationRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
@@ -16,14 +18,12 @@ class Participation
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      * 
-     * @Groups({"users_list", "user_detail"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="boolean")
      * 
-     * @Groups({"users_list", "user_detail"})
      */
     private $status;
 
@@ -32,6 +32,7 @@ class Participation
      * @ORM\JoinColumn(nullable=false)
      * 
      * @Groups({"users_list", "user_detail"})
+     * @Groups({"events_list", "event_detail"})
      */
     private $event;
 
@@ -40,6 +41,7 @@ class Participation
      * @ORM\JoinColumn(nullable=false)
      * 
      * @Groups({"users_list", "user_detail"})
+     * @Groups({"events_list", "event_detail"})
      */
     private $user;
 
