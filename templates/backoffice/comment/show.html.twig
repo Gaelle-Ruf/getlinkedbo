@@ -1,0 +1,20 @@
+{% extends "backoffice/layout.html.twig" %}
+
+{% block content %}
+
+    <h3>
+        Commentaire
+        {{ comment.name }}
+    </h3>
+
+    <p>
+        <a href="{{ path('backoffice_comment_edit', {id:comment.id}) }}">Editer</a>
+        |
+        <a href="{{ path('backoffice_comment_delete', {id:comment.id}) }}" onclick="return confirm('Êtes-vous sur de vouloir effectuer cette action ?');">Supprimer</a>
+    </p>
+
+    <p>
+        <a href="{{ path('backoffice_comment_index') }}">Retour à la liste</a>
+    </p>
+
+{% endblock %}
