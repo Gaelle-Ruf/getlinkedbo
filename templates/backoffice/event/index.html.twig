@@ -1,0 +1,23 @@
+{% extends 'backoffice/layout.html.twig' %}
+
+{% block title %}
+    Événements
+{% endblock %}
+
+{% block content %}
+    <main>
+        <h2>Événements</h2>
+        <p>
+            <a href="{{ path('backoffice_event_add') }}">Ajouter</a>
+        </p>
+        <ul>
+            {% for event in events %}
+                <li>
+                    <a href="{{ path('backoffice_event_show', {id:event.id}) }}">
+                        {{ event.name }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </main>
+{% endblock %}
