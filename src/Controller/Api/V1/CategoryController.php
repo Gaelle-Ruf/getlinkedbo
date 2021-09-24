@@ -98,7 +98,7 @@ class CategoryController extends AbstractController
         // We get datas received in JSON format
         $jsonData = $request->getContent();
 
-        // We get the category for whom the ID is $id
+        // We get the category for which the ID is $id
         $category = $categoryRepository->find($id);
 
         if (!$category) {
