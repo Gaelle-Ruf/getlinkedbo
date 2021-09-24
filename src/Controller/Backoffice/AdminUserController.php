@@ -2,6 +2,7 @@
 
 namespace App\Controller\Backoffice;
 
+use App\Entity\AdminUser;
 use App\Repository\AdminUserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,10 +31,10 @@ class AdminUserController extends AbstractController
      * 
      * @Route("/{id}", name="show", methods={"GET"})
      */
-    public function show(AdminUserRepository $adminUserRepository): Response
+    public function show(AdminUser $adminUser): Response
     {
         return $this->render('backoffice/admin_user/show.html.twig', [
-            'adminusers' => $adminUserRepository
+            'adminuser' => $adminUser
         ]);
     }
 }
