@@ -1,0 +1,23 @@
+{% extends 'backoffice/layout.html.twig' %}
+
+{% block title %}
+    Participations
+{% endblock %}
+
+{% block content %}
+    <main>
+        <h2>Participations</h2>
+        <p>
+            <a href="{{ path('backoffice_participation_add') }}">Ajouter</a>
+        </p>
+        <ul>
+            {% for participation in participations %}
+                <li>
+                    <a href="{{ path('backoffice_participation_show', {id:participation.id}) }}">
+                        {{ participation.name }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </main>
+{% endblock %}

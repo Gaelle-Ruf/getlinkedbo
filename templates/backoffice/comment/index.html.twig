@@ -1,0 +1,23 @@
+{% extends 'backoffice/layout.html.twig' %}
+
+{% block title %}
+    Commentaires
+{% endblock %}
+
+{% block content %}
+    <main>
+        <h2>Commentaires</h2>
+        <p>
+            <a href="{{ path('backoffice_comment_add') }}">Ajouter</a>
+        </p>
+        <ul>
+            {% for comment in comments %}
+                <li>
+                    <a href="{{ path('backoffice_comment_show', {id:comment.id}) }}">
+                        {{ comment.name }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </main>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'backoffice/layout.html.twig' %}
+
+{% block title %}
+    Styles
+{% endblock %}
+
+{% block content %}
+    <main>
+        <h2>Styles</h2>
+        <p>
+            <a href="{{ path('backoffice_style_add') }}">Ajouter</a>
+        </p>
+        <ul>
+            {% for style in styles %}
+                <li>
+                    <a href="{{ path('backoffice_style_show', {id:style.id}) }}">
+                        {{ style.name }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </main>
+{% endblock %}
