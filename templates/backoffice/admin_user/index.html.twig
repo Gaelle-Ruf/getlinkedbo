@@ -1,0 +1,48 @@
+{% extends 'backoffice/layout.html.twig' %}
+
+{% block title %}
+    Administrateurs -
+    {{parent()}}
+{% endblock %}
+
+{% block body %}
+<h1>Liste des administrateurs du Backoffice -</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>Rôle</th>
+                <th>Prénom</th>
+                <th>Nom</th>
+                <th>Création le</th>
+                <th>Mis à jour le</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for adminuser in adminusers %}
+                <tr>
+                    <td>{{ adminuser.id }}</td>
+                    <td>{{ adminuser.email }}</td>
+                    <td>{{ adminuser.roles ? adminuser.roles|json_encode : '' }}</td>
+                    <td>{{ adminuser.firstname }}</td>
+                    <td>{{ adminuser.lastname }}</td>
+                    <td>{{ adminuser.createdAt ? adminuser.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ adminuser.updatedAt ? adminuser.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>
+                        <a href="{{ path('backoffice_admin_user_show', {'id': adminuser.id}) }}">Voir le détail</a>
+                        <a href="{# {{ path('backoffice_admin_user_edit', {'id': adminuser.id}) }} #}">Modifier le profil</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="9">Aucun administrateur trouvé</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('backoffice_admin_user_new') }} #}">Ajouter</a>
+{% endblock %}

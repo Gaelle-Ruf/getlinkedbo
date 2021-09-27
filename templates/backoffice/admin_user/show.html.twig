@@ -1,0 +1,59 @@
+{% extends 'backoffice/layout.html.twig' %}
+
+{% block title %}
+    Administrateurs -
+    {{parent()}}
+{% endblock %}
+
+{% block body %}
+<h1>Administrateur du Backoffice -</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <td>{{ adminuser.id }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ adminuser.email }}</td>
+            </tr>
+            <tr>
+                <th>Rôle</th>
+                <td>{{ adminuser.roles ? adminuser.roles|json_encode : '' }}</td>
+            </tr>
+            {# <tr>
+                <th>Mot de passe</th>
+                <td>{{ adminuser.password }}</td>
+            </tr> #}
+            <tr>
+                <th>Prénom</th>
+                <td>{{ adminuser.firstname }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ adminuser.lastname }}</td>
+            </tr>
+            <tr>
+                <th>Création le</th>
+            <td>{{ adminuser.createdAt ? adminuser.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Mis à jour le</th>
+            <td>{{ adminuser.createdAt ? adminuser.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+
+
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>            
+    </table>
+
+     <a href="{{ path('backoffice_admin_user_index') }}">Retour à la liste</a>
+
+    <a href="{# {{ path('backoffice_admin_user_edit', {'id': adminuser.id}) }} #}">Modifier</a>
+
+    {# {{ include('backoffice/admin/user/_delete_form.html.twig') }} #}
+
+{% endblock %}
