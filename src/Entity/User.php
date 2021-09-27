@@ -35,6 +35,7 @@ class User
      * @ORM\Column(type="string", length=128)
      * 
      * @Groups({"users_list", "user_detail"})
+     * @Groups({"events_list", "event_detail"})
      */
     private $name;
 
@@ -186,6 +187,7 @@ class User
         $this->comment = new ArrayCollection();
         $this->participation = new ArrayCollection();
     }
+
 
     public function getId(): ?int
     {
