@@ -1,0 +1,20 @@
+{% extends "backoffice/layout.html.twig" %}
+
+{% block content %}
+
+    <h3>
+        Événement
+        {{ event.name }}
+    </h3>
+
+    <p>
+        <a href="{{ path('backoffice_event_edit', {id:event.id}) }}">Editer</a>
+        |
+        <a href="{{ path('backoffice_event_delete', {id:event.id}) }}" onclick="return confirm('Êtes-vous sur de vouloir effectuer cette action ?');">Supprimer</a>
+    </p>
+
+    <p>
+        <a href="{{ path('backoffice_event_index') }}">Retour à la liste</a>
+    </p>
+
+{% endblock %}
