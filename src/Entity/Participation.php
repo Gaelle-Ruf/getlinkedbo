@@ -18,11 +18,15 @@ class Participation
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      * 
+     * @Groups({"users_list", "user_detail"})
+     * 
      */
     private $id;
 
     /**
      * @ORM\Column(type="boolean")
+     * 
+     * @Groups({"users_list", "user_detail"})
      * 
      */
     private $status;
@@ -31,7 +35,7 @@ class Participation
      * @ORM\ManyToOne(targetEntity=Event::class, inversedBy="participation")
      * @ORM\JoinColumn(nullable=false)
      * 
-     * @Groups({"users_list", "user_detail"})
+     * 
      * @Groups({"events_list", "event_detail"})
      */
     private $event;
@@ -40,7 +44,7 @@ class Participation
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="participation")
      * @ORM\JoinColumn(nullable=false)
      * 
-     * @Groups({"users_list", "user_detail"})
+     * 
      * @Groups({"events_list", "event_detail"})
      */
     private $user;

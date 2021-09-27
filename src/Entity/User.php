@@ -21,7 +21,11 @@ class User
      * @ORM\Column(type="integer")
      * 
      * @Groups({"users_list", "user_detail"})
+<<<<<<< HEAD
      * @Groups({"comments_list"})
+=======
+     * @Groups({"comments_list", "comment_detail"})
+>>>>>>> d0e91ee8b9aaeb348629a5f54688924c98ca5830
      */
     private $id;
 
@@ -29,7 +33,11 @@ class User
      * @ORM\Column(type="string", length=64)
      * 
      * @Groups({"users_list", "user_detail"})
+<<<<<<< HEAD
      * @Groups({"comments_list"})
+=======
+     * @Groups({"comments_list", "comment_detail"})
+>>>>>>> d0e91ee8b9aaeb348629a5f54688924c98ca5830
      */
     private $type;
 
@@ -38,7 +46,7 @@ class User
      * 
      * @Groups({"users_list", "user_detail"})
      * @Groups({"events_list", "event_detail"})
-     * @Groups({"comments_list"})
+     * @Groups({"comments_list", "comment_detail"})
      */
     private $name;
 
@@ -172,6 +180,7 @@ class User
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="user")
      * 
      * @Groups({"users_list", "user_detail"})
+     * 
      */
     private $comment;
 

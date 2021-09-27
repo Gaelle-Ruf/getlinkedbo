@@ -18,11 +18,15 @@ class Style
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      * 
+     * @Groups({"users_list", "user_detail"})
+     * 
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=64)
+     * 
+     * @Groups({"users_list", "user_detail"})
      * 
      */
     private $name;

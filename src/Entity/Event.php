@@ -21,7 +21,7 @@ class Event
      * 
      * @Groups({"events_list", "event_detail"})
      * @Groups({"users_list", "user_detail"})
-     * @Groups({"comments_list"})
+     * @Groups({"comments_list", "comment_detail"})
      */
     private $id;
 
@@ -30,7 +30,7 @@ class Event
      * 
      * @Groups({"events_list", "event_detail"})
      * @Groups({"users_list", "user_detail"})
-     * @Groups({"comments_list"})
+     * @Groups({"comments_list", "comment_detail"})
      */
     private $name;
 

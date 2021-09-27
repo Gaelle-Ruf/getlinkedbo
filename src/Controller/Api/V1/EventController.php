@@ -28,7 +28,7 @@ class EventController extends AbstractController
     {
         
         $events = $eventRepository->findAll();
-        // dd($events);
+        dd($events);
         return $this->json($events, 200, [], ['groups' => 'events_list']
         
     );

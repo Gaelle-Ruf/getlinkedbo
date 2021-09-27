@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
+
 /**
  * @ORM\Entity(repositoryClass=CommentRepository::class)
  */
@@ -19,12 +20,22 @@ class Comment
      * @ORM\Column(type="integer")
      * @Groups({"comments_list"})
      * 
+     * 
+     * @Groups({"comments_list", "comment_detail"})
+     * @Groups({"users_list", "user_detail"})
+     * @Groups({"events_list", "event_detail"})
+     * 
      */
     private $id;
 
     /**
      * @ORM\Column(type="text")
      * @Groups({"comments_list"})
+     * 
+     * 
+     * @Groups({"comments_list", "comment_detail"})
+     * @Groups({"users_list", "user_detail"})
+     * @Groups({"events_list", "event_detail"})
      * 
      */
     private $comment;
@@ -33,6 +44,10 @@ class Comment
      * @ORM\Column(type="smallint")
      * @Groups({"comments_list"})
      * 
+     * @Groups({"comments_list", "comment_detail"})
+     * @Groups({"users_list", "user_detail"})
+     * @Groups({"events_list", "event_detail"})
+     * 
      */
     private $rate;
 
@@ -40,12 +55,16 @@ class Comment
      * @ORM\Column(type="datetime_immutable", nullable=true)
      * @Groups({"comments_list"})
      * 
+     * @Groups({"comments_list", "comment_detail"})
+     * 
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime_immutable", nullable=true)
      * @Groups({"comments_list"})
+     * 
+     * @Groups({"comments_list", "comment_detail"})
      * 
      */
     private $updatedAt;
@@ -55,7 +74,7 @@ class Comment
      * 
      * @Groups({"users_list", "user_detail"})
      * @Groups({"events_list", "event_detail"})
-     * @Groups({"comments_list"})
+     * @Groups({"comments_list", "comment_detail"})
      * 
      */
     private $event;
@@ -65,7 +84,7 @@ class Comment
      * 
      * @Groups({"users_list", "user_detail"})
      * @Groups({"events_list", "event_detail"})
-     * @Groups({"comments_list"})
+     * @Groups({"comments_list", "comment_detail"})
      * 
      */
     private $user;
