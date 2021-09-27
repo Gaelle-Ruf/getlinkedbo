@@ -28,7 +28,7 @@ class CommentController extends AbstractController
         $comments = $commentRepository->findAll();
         // dd($comments);
 
-        return $this->json($comments, 200, [], ['groups' => 'comments_list']);
+        return $this->json($comments, 200,[], ['groups' => 'comments_list']);
     }
 
     /**
