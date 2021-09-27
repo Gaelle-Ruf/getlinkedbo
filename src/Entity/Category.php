@@ -18,35 +18,35 @@ class Category
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      * 
-
+     * @Groups({"users_list", "user_detail"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=64)
      * 
-
+     * @Groups({"users_list", "user_detail"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=128, nullable=true)
+     *
      * 
-
      */
     private $slug;
 
     /**
      * @ORM\Column(type="datetime_immutable", nullable=true)
      * 
-
+     * 
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime_immutable", nullable=true)
      * 
-
+     * 
      */
     private $updatedAt;
 
