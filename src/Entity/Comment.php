@@ -20,10 +20,8 @@ class Comment
      * @ORM\Column(type="integer")
      * @Groups({"comments_list"})
      * 
-     * 
-     * @Groups({"comments_list", "comment_detail"})
      * @Groups({"users_list", "user_detail"})
-     * @Groups({"events_list", "event_detail"})
+     * @Groups({"comments_list", "comment_detail"})
      * 
      */
     private $id;
@@ -32,10 +30,8 @@ class Comment
      * @ORM\Column(type="text")
      * @Groups({"comments_list"})
      * 
-     * 
-     * @Groups({"comments_list", "comment_detail"})
      * @Groups({"users_list", "user_detail"})
-     * @Groups({"events_list", "event_detail"})
+     * @Groups({"comments_list", "comment_detail"})
      * 
      */
     private $comment;
@@ -45,8 +41,6 @@ class Comment
      * @Groups({"comments_list"})
      * 
      * @Groups({"comments_list", "comment_detail"})
-     * @Groups({"users_list", "user_detail"})
-     * @Groups({"events_list", "event_detail"})
      * 
      */
     private $rate;
@@ -72,9 +66,6 @@ class Comment
     /**
      * @ORM\ManyToOne(targetEntity=Event::class, inversedBy="comment")
      * 
-     * @Groups({"users_list", "user_detail"})
-     * @Groups({"events_list", "event_detail"})
-     * @Groups({"comments_list", "comment_detail"})
      * 
      */
     private $event;
@@ -82,9 +73,6 @@ class Comment
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="comment")
      * 
-     * @Groups({"users_list", "user_detail"})
-     * @Groups({"events_list", "event_detail"})
-     * @Groups({"comments_list", "comment_detail"})
      * 
      */
     private $user;

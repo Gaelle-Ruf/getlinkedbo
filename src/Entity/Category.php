@@ -18,14 +18,18 @@ class Category
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      * 
+     * @Groups({"categories_list", "category_detail"})
      * @Groups({"users_list", "user_detail"})
+     * @Groups({"events_list", "event_detail"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=64)
      * 
+     * @Groups({"categories_list", "category_detail"})
      * @Groups({"users_list", "user_detail"})
+     * @Groups({"events_list", "event_detail"})
      */
     private $name;
 
@@ -53,16 +57,13 @@ class Category
     /**
      * @ORM\ManyToMany(targetEntity=Event::class, mappedBy="category")
      * 
-     * @Groups({"users_list", "user_detail"})
-     * @Groups({"events_list", "event_detail"})
      */
     private $events;
 
     /**
      * @ORM\ManyToMany(targetEntity=User::class, mappedBy="category")
      * 
-     * @Groups({"users_list", "user_detail"})
-     * @Groups({"events_list", "event_detail"})
+     * 
      * 
      */
     private $users;
