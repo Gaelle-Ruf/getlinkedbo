@@ -18,11 +18,17 @@ class Comment
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      * 
+     * @Groups({"users_list", "user_detail"})
+     * @Groups({"comments_list", "comment_detail"})
+     * 
      */
     private $id;
 
     /**
      * @ORM\Column(type="text")
+     * 
+     * @Groups({"users_list", "user_detail"})
+     * @Groups({"comments_list", "comment_detail"})
      * 
      */
     private $comment;
@@ -30,11 +36,15 @@ class Comment
     /**
      * @ORM\Column(type="smallint")
      * 
+     * @Groups({"comments_list", "comment_detail"})
+     * 
      */
     private $rate;
 
     /**
      * @ORM\Column(type="datetime_immutable", nullable=true)
+     * 
+     * @Groups({"comments_list", "comment_detail"})
      * 
      */
     private $createdAt;
@@ -48,8 +58,6 @@ class Comment
     /**
      * @ORM\ManyToOne(targetEntity=Event::class, inversedBy="comment")
      * 
-     * @Groups({"users_list", "user_detail"})
-     * @Groups({"events_list", "event_detail"})
      * 
      */
     private $event;
@@ -57,8 +65,6 @@ class Comment
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="comment")
      * 
-     * @Groups({"users_list", "user_detail"})
-     * @Groups({"events_list", "event_detail"})
      * 
      */
     private $user;

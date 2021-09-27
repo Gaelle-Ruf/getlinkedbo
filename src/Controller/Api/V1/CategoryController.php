@@ -29,7 +29,7 @@ class CategoryController extends AbstractController
         $categories = $categoryRepository->findAll();
         // dd($categories);
 
-        return $this->json($categories, 200, [], []
+        return $this->json($categories, 200, [], ['groups' => 'categories_list']
         );
         // 'groups' => 'categories_list'
     }
@@ -49,7 +49,7 @@ class CategoryController extends AbstractController
         }
         // dd($category);
 
-        return $this->json($category, 200, [], []
+        return $this->json($category, 200, [], ['groups' => 'category_detail']
     );
     // 'groups' => 'user_detail'
     }
@@ -87,7 +87,7 @@ class CategoryController extends AbstractController
 
     }
     /**
-     * Category update according to the id
+     * Categoryok update according to the id
      * 
      * @Route("/{id}", name="update", methods={"PUT", "PATCH"})
      *
