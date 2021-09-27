@@ -18,29 +18,30 @@ class Style
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      * 
-     * @Groups({"users_list", "user_detail"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=64)
      * 
-     * @Groups({"users_list", "user_detail"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=128, nullable=true)
+     * 
      */
     private $slug;
 
     /**
      * @ORM\Column(type="datetime_immutable", nullable=true)
+     * 
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime_immutable", nullable=true)
+     * 
      */
     private $updatedAt;
 
@@ -48,6 +49,7 @@ class Style
      * @ORM\ManyToMany(targetEntity=Event::class, mappedBy="style")
      * 
      * @Groups({"users_list", "user_detail"})
+     * @Groups({"events_list", "event_detail"})
      */
     private $events;
 
@@ -55,6 +57,7 @@ class Style
      * @ORM\ManyToMany(targetEntity=User::class, mappedBy="style")
      * 
      * @Groups({"users_list", "user_detail"})
+     * @Groups({"events_list", "event_detail"})
      */
     private $users;
 
