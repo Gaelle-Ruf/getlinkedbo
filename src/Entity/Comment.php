@@ -17,30 +17,35 @@ class Comment
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"comments_list"})
      * 
      */
     private $id;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"comments_list"})
      * 
      */
     private $comment;
 
     /**
      * @ORM\Column(type="smallint")
+     * @Groups({"comments_list"})
      * 
      */
     private $rate;
 
     /**
      * @ORM\Column(type="datetime_immutable", nullable=true)
+     * @Groups({"comments_list"})
      * 
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime_immutable", nullable=true)
+     * @Groups({"comments_list"})
      * 
      */
     private $updatedAt;
@@ -50,6 +55,7 @@ class Comment
      * 
      * @Groups({"users_list", "user_detail"})
      * @Groups({"events_list", "event_detail"})
+     * @Groups({"comments_list"})
      * 
      */
     private $event;
@@ -59,6 +65,7 @@ class Comment
      * 
      * @Groups({"users_list", "user_detail"})
      * @Groups({"events_list", "event_detail"})
+     * @Groups({"comments_list"})
      * 
      */
     private $user;

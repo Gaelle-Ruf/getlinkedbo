@@ -21,6 +21,7 @@ class Event
      * 
      * @Groups({"events_list", "event_detail"})
      * @Groups({"users_list", "user_detail"})
+     * @Groups({"comments_list"})
      */
     private $id;
 
@@ -29,6 +30,7 @@ class Event
      * 
      * @Groups({"events_list", "event_detail"})
      * @Groups({"users_list", "user_detail"})
+     * @Groups({"comments_list"})
      */
     private $name;
 
@@ -36,13 +38,15 @@ class Event
      * @ORM\Column(type="text")
      * 
      * @Groups({"events_list", "event_detail"})
+     * 
      */
-    private $location;
+    private $address;
 
     /**
      * @ORM\Column(type="datetime_immutable")
      * 
      * @Groups({"events_list", "event_detail"})
+     * 
      */
     private $date;
 
@@ -50,6 +54,7 @@ class Event
      * @ORM\Column(type="string", length=255, nullable=true)
      * 
      * @Groups({"events_list", "event_detail"})
+     * 
      */
     private $picture;
 
