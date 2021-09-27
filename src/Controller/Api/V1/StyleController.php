@@ -28,7 +28,7 @@ class StyleController extends AbstractController
         $styles = $styleRepository->findAll();
         // dd($styles);
 
-        return $this->json($styles, 200,[], []);
+        return $this->json($styles, 200, [], []);
     }
 
     /**
