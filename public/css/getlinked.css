@@ -24,15 +24,19 @@ body {
 
 
 .dropdown-item:hover, .nav-item:hover, .btn:hover, a:hover, .active, a.dropdown-toggle, a.navbar-brand{
-    color:#db4472 !important;   
+    color:#CA0E43 !important;   
 }
 
-.container__title, .container__p{
+.container__title, .container__title__p{
     color:white;
     text-align: center;
 }
 
 
-
+footer{
+    z-index:0;
+    color:black !important;
+    
+}
 
 

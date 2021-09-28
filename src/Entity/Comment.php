@@ -18,6 +18,7 @@ class Comment
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"comments_list"})
      * 
      * @Groups({"users_list", "user_detail"})
      * @Groups({"comments_list", "comment_detail"})
@@ -27,6 +28,7 @@ class Comment
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"comments_list"})
      * 
      * @Groups({"users_list", "user_detail"})
      * @Groups({"comments_list", "comment_detail"})
@@ -36,6 +38,7 @@ class Comment
 
     /**
      * @ORM\Column(type="smallint")
+     * @Groups({"comments_list"})
      * 
      * @Groups({"comments_list", "comment_detail"})
      * 
@@ -44,6 +47,7 @@ class Comment
 
     /**
      * @ORM\Column(type="datetime_immutable", nullable=true)
+     * @Groups({"comments_list"})
      * 
      * @Groups({"comments_list", "comment_detail"})
      * 
@@ -52,6 +56,7 @@ class Comment
 
     /**
      * @ORM\Column(type="datetime_immutable", nullable=true)
+     * @Groups({"comments_list"})
      * 
      * @Groups({"comments_list", "comment_detail"})
      * 

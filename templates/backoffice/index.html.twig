@@ -7,8 +7,12 @@
     <div class="container">
     
         <h2 class="container__title">Page d'administration</h2>
-        <p class="container__p">
-            Bienvenue sur GetLinked
+        <p class="container__title__p">
+        {% if app.user %}
+            Bienvenue dans le Backoffice de GetLinked {{app.adminuser.firstname}} !
+        {% else %}
+            <a href="{{ path('app_login') }}" class="btn btn-danger my-2">Se connecter</a>            
+        {% endif %}
         </p>
     </div>
 {% endblock %}

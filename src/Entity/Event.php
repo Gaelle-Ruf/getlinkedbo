@@ -38,13 +38,15 @@ class Event
      * @ORM\Column(type="text")
      * 
      * @Groups({"events_list", "event_detail"})
+     * 
      */
-    private $location;
+    private $address;
 
     /**
      * @ORM\Column(type="datetime_immutable")
      * 
      * @Groups({"events_list", "event_detail"})
+     * 
      */
     private $date;
 
@@ -52,6 +54,7 @@ class Event
      * @ORM\Column(type="string", length=255, nullable=true)
      * 
      * @Groups({"events_list", "event_detail"})
+     * 
      */
     private $picture;
 
@@ -71,7 +74,7 @@ class Event
     private $price;
 
     /**
-     * @ORM\Column(type="time", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      * 
      * @Groups({"events_list", "event_detail"})
      */
@@ -174,14 +177,14 @@ class Event
         return $this;
     }
 
-    public function getLocation(): ?string
+    public function getAddress(): ?string
     {
-        return $this->location;
+        return $this->address;
     }
 
-    public function setLocation(string $location): self
+    public function setAddress(string $address): self
     {
-        $this->location = $location;
+        $this->address = $address;
 
         return $this;
     }
@@ -235,12 +238,12 @@ class Event
         return $this;
     }
 
-    public function getDuration(): ?\DateTimeInterface
+    public function getDuration(): ?string
     {
         return $this->duration;
     }
 
-    public function setDuration(?\DateTimeInterface $duration): self
+    public function setDuration(?string $duration): self
     {
         $this->duration = $duration;
 
