@@ -177,14 +177,14 @@ class Event
         return $this;
     }
 
-    public function getLocation(): ?string
+    public function getAddress(): ?string
     {
-        return $this->location;
+        return $this->address;
     }
 
-    public function setLocation(string $location): self
+    public function setAddress(string $address): self
     {
-        $this->location = $location;
+        $this->address = $address;
 
         return $this;
     }
