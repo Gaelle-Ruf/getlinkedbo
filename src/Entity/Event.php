@@ -74,7 +74,7 @@ class Event
     private $price;
 
     /**
-     * @ORM\Column(type="duration", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      * 
      * @Groups({"events_list", "event_detail"})
      */
