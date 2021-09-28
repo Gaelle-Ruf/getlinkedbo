@@ -74,7 +74,7 @@ class Event
     private $price;
 
     /**
-     * @ORM\Column(type="time", nullable=true)
+     * @ORM\Column(type="duration", nullable=true)
      * 
      * @Groups({"events_list", "event_detail"})
      */
@@ -238,12 +238,12 @@ class Event
         return $this;
     }
 
-    public function getDuration(): ?\DateTimeInterface
+    public function getDuration(): ?string
     {
         return $this->duration;
     }
 
-    public function setDuration(?\DateTimeInterface $duration): self
+    public function setDuration(?string $duration): self
     {
         $this->duration = $duration;
 
