@@ -8,3 +8,6 @@
 ## Gestion des confirmations de création de comptes users par email
 
 ```composer require symfonycasts/verify-email-bundle```
+
+
+composer require lexik/jwt-authentication-bundle
