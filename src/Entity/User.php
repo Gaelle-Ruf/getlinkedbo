@@ -21,11 +21,7 @@ class User
      * @ORM\Column(type="integer")
      * 
      * @Groups({"users_list", "user_detail"})
-<<<<<<< HEAD
-     * @Groups({"comments_list"})
-=======
      * @Groups({"comments_list", "comment_detail"})
->>>>>>> d0e91ee8b9aaeb348629a5f54688924c98ca5830
      */
     private $id;
 
@@ -33,11 +29,7 @@ class User
      * @ORM\Column(type="string", length=64)
      * 
      * @Groups({"users_list", "user_detail"})
-<<<<<<< HEAD
-     * @Groups({"comments_list"})
-=======
      * @Groups({"comments_list", "comment_detail"})
->>>>>>> d0e91ee8b9aaeb348629a5f54688924c98ca5830
      */
     private $type;
 
