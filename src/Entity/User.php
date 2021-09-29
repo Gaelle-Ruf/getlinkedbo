@@ -128,7 +128,7 @@ class User
 
     /**
      * @var string The hashed password
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"users_list", "user_detail"})
      */
     private $password;
