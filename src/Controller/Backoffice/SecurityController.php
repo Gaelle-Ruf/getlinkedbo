@@ -4,9 +4,10 @@ namespace App\Controller\Api\V1;
 
 use App\Repository\Api\V1\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 /**
@@ -15,9 +16,9 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class SecurityController extends AbstractController
 {
     /**
-     * @Route("/login", name="login")
+     * @Route("/login/{id}", name="login", requirements={"id":"\d+"}) 
      */
-    public function login(AuthenticationUtils $authenticationUtils, UserRepository $userRepository): Response
+    public function login(AuthenticationUtils $authenticationUtils, UserRepository $userRepository, Request $request, int $id): Response 
     {
         /* if ($this->getUser()) {
              return $this->redirectToRoute('target_path');
@@ -35,11 +36,19 @@ class SecurityController extends AbstractController
         if (null === $apiToken) {
             // The token header was empty, authentication fails with HTTP Status
             // Code 401 "Unauthorized"
-            throw new CustomUserMessageAuthenticationException(401, 'No API token provided');
+            throw new CustomUserMessageAuthenticationException('No API token provided', [401]);
         } else {
             
-            $user->getUser();
-            return $this->json($user, 200, );
+           
+
+            $user = $userRepository->find($id);
+
+            
+
+            return $this->json([
+                'user'=>$user,
+                'token'=>$apiToken
+            ], 200);
         }
     }
 
