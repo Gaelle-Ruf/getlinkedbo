@@ -8,13 +8,56 @@
     </h3>
 
     <p>
-        <a href="{{ path('backoffice_event_edit', {id:event.id}) }}">Editer</a>
-        |
-        <a href="{{ path('backoffice_event_delete', {id:event.id}) }}" onclick="return confirm('Êtes-vous sur de vouloir effectuer cette action ?');">Supprimer</a>
+    <li>
+             <th>Name :</th>
+             <td>{{ event.name }}</td>
+    </li>
+    <li>
+             <th>Address :</th>
+             <td>{{ event.address }}</td>
+    </li>
+    {#<li>
+             <th>Date</th>
+             <td>{{ event.date }}</td>
+    </li>#}
+    <li>
+             <th>Picture :</th>
+             <td>{{ event.picture }}</td>
+    </li>
+    <li>
+             <th>Description :</th>
+             <td>{{ event.description }}</td>
+    </li>
+    <li>
+             <th>Price :</th>
+             <td>{{ event.price }}</td>
+    </li>
+    <li>
+             <th>Duration :</th>
+             <td>{{ event.duration }}</td>
+    </li>
+    <li>
+             <th>Email :</th>
+             <td>{{ event.email }}</td>
+    </li>
+    <li>
+            <th>CreatedAt :</th>
+            <td>{{ event.createdAt ? event.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+    </li>
+    <li>
+            <th>UpdatedAt :</th>
+            <td>{{ event.updatedAt ? event.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+    </li>
     </p>
 
     <p>
-        <a href="{{ path('backoffice_event_index') }}">Retour à la liste</a>
+        <a href="{{ path('backoffice_event_edit', {id:event.id}) }}">Editer l'événement</a>
+        |
+        <a href="{{ path('backoffice_event_delete', {id:event.id}) }}" onclick="return confirm('Êtes-vous sur de vouloir effectuer cette action ?');">Supprimer l'événement</a>
+    </p>
+
+    <p>
+        <a href="{{ path('backoffice_event_index') }}">Retour à la liste des événements</a>
     </p>
 
 {% endblock %}

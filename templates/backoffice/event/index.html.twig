@@ -7,9 +7,6 @@
 {% block content %}
     <main>
         <h2>Événements</h2>
-        <p>
-            <a href="{{ path('backoffice_event_add') }}">Ajouter</a>
-        </p>
         <ul>
             {% for event in events %}
                 <li>
@@ -19,5 +16,8 @@
                 </li>
             {% endfor %}
         </ul>
+        <p>
+            <a href="{{ path('backoffice_event_add') }}">Ajouter un événement</a>
+        </p>
     </main>
 {% endblock %}

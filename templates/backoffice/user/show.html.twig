@@ -1,0 +1,87 @@
+{% extends "backoffice/layout.html.twig" %}
+
+{% block content %}
+
+    <h3>
+        Utilisateur
+        {{ user.name }}
+    </h3>
+
+    <p>
+    <li>
+             <th>Type :</th>
+             <td>{{ user.type }}</td>
+    </li>
+    <li>
+             <th>Name :</th>
+             <td>{{ user.name }}</td>
+    </li>
+    <li>
+             <th>Firstname :</th>
+             <td>{{ user.firstname }}</td>
+    </li>
+    <li>
+             <th>Lastname :</th>
+             <td>{{ user.lastname }}</td>
+    </li>
+    <li>
+             <th>Picture :</th>
+             <td>{{ user.picture }}</td>
+    </li>
+    <li>
+             <th>Description :</th>
+             <td>{{ user.description }}</td>
+    </li>
+    <li>
+             <th>Schedule :</th>
+             <td>{{ user.schedule }}</td>
+    </li>
+    <li>
+             <th>Nb members :</th>
+             <td>{{ user.nbMembers }}</td>
+    </li>
+    <li>
+             <th>Address :</th>
+             <td>{{ user.address }}</td>
+    </li>
+    <li>
+             <th>Website :</th>
+             <td>{{ user.website }}</td>
+    </li>
+    <li>
+             <th>Facebook :</th>
+             <td>{{ user.facebook }}</td>
+    </li>
+    <li>
+             <th>Instagram :</th>
+             <td>{{ user.instagram }}</td>
+    </li>
+    <li>
+             <th>Twitter :</th>
+             <td>{{ user.twitter }}</td>
+    </li>
+    <li>
+             <th>Email :</th>
+             <td>{{ user.email }}</td>
+    </li>
+    <li>
+            <th>CreatedAt :</th>
+            <td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+    </li>
+    <li>
+            <th>UpdatedAt :</th>
+            <td>{{ user.updatedAt ? user.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+    </li>
+    </p>
+
+    <p>
+        <a href="{{ path('backoffice_user_edit', {id:user.id}) }}">Editer l'utilisateur</a>
+        |
+        <a href="{{ path('backoffice_user_delete', {id:user.id}) }}" onclick="return confirm('Êtes-vous sur de vouloir effectuer cette action ?');">Supprimer l'événement</a>
+    </p>
+
+    <p>
+        <a href="{{ path('backoffice_user_index') }}">Retour à la liste des utilisateurs</a>
+    </p>
+
+{% endblock %}

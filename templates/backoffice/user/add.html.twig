@@ -2,14 +2,14 @@
 
 {% block content %}
 
-    <h2>Ajout d'un événement</h2>
+    <h2>Ajout d'un utilisateur</h2>
     {{ form_start(formView, {'attr': {'novalidate': 'novalidate'}}) }}
     {{ form_row(formView.name, {'attr': {'class':'geronimo'}}) }}
     {{ form_end(formView) }}
     <button class="btn btn-primary">Valider</button>
 
     <p>
-        <a href="{{ path('backoffice_event_index') }}">Retour à la liste</a>
+        <a href="{{ path('backoffice_user_index') }}">Retour à la liste</a>
     </p>
 
 {% endblock %}

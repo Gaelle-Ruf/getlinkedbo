@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">GetLinked</a>
+    <a class="navbar-brand" href="{{path('backoffice_index')}}">GetLinked</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -8,18 +8,18 @@
     <div class="collapse navbar-collapse" id="navbarColor02">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link active" href="{{path('backoffice_index')}}">Accueil
+          <a class="nav-link" href="{{path('backoffice_index')}}">Accueil
             <span class="visually-hidden">(current)</span>
           </a>
+        <li class="nav-item">
+          <a class="nav-link" href="{{path('backoffice_event_index')}}">Événements</a>
+        </li>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Artistes</a>
+          <a class="nav-link" href="{{path('backoffice_user_index')}}">Artistes</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Organisateurs</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Evènements</a>
+          <a class="nav-link" href="{{path('backoffice_user_index')}}">Organisateurs</a>
         </li>
         
       </ul>
