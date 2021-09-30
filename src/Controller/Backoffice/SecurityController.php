@@ -11,12 +11,12 @@ use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationExc
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 /**
- * @Route("/api/v1")
+ * 
  */
 class SecurityController extends AbstractController
 {
     /**
-     * @Route("/login/{id}", name="login", requirements={"id":"\d+"}) 
+     * 
      */
     public function login(AuthenticationUtils $authenticationUtils, UserRepository $userRepository, Request $request, int $id): Response 
     {
