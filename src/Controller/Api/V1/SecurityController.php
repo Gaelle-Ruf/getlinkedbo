@@ -2,9 +2,11 @@
 
 namespace App\Controller\Api\V1;
 
+use App\Repository\Api\V1\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 /**
@@ -15,9 +17,9 @@ class SecurityController extends AbstractController
     /**
      * @Route("/login", name="login")
      */
-    public function login(AuthenticationUtils $authenticationUtils): Response
+    public function login(AuthenticationUtils $authenticationUtils, UserRepository $userRepository): Response
     {
-        /* if ($this->getUser()) {  
+        /* if ($this->getUser()) {
              return $this->redirectToRoute('target_path');
         } */
 
@@ -27,7 +29,18 @@ class SecurityController extends AbstractController
         $lastUsername = $authenticationUtils->getLastUsername();
 
         // TODO return token infos users
-        /* return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]); */
+
+        
+        $apiToken = $request->headers->get('X-AUTH-TOKEN');
+        if (null === $apiToken) {
+            // The token header was empty, authentication fails with HTTP Status
+            // Code 401 "Unauthorized"
+            throw new CustomUserMessageAuthenticationException(401, 'No API token provided');
+        } else {
+            
+            $user->getUser();
+            return $this->json($user, 200, );
+        }
     }
 
     /**
