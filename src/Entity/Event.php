@@ -74,7 +74,7 @@ class Event
     private $price;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="time", nullable=true)
      * 
      * @Groups({"events_list", "event_detail"})
      */
@@ -177,14 +177,14 @@ class Event
         return $this;
     }
 
-    public function getAddress(): ?string
+    public function getLocation(): ?string
     {
-        return $this->address;
+        return $this->location;
     }
 
-    public function setAddress(string $address): self
+    public function setLocation(string $location): self
     {
-        $this->address = $address;
+        $this->location = $location;
 
         return $this;
     }
@@ -238,12 +238,12 @@ class Event
         return $this;
     }
 
-    public function getDuration(): ?string
+    public function getDuration(): ?\DateTimeInterface
     {
         return $this->duration;
     }
 
-    public function setDuration(?string $duration): self
+    public function setDuration(?\DateTimeInterface $duration): self
     {
         $this->duration = $duration;
 
