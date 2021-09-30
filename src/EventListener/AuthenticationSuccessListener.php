@@ -7,6 +7,9 @@ use App\Entity\User;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\AuthenticationSuccessEvent;
 use Symfony\Component\Security\Core\User\UserInterface;
 
+/**
+ * @Route("/api/login_check", name="api_login_check")
+ */
 class AuthenticationSuccessListener {
 
     /**
