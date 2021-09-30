@@ -56,8 +56,9 @@ class User
      */
     private $lastname;
 
+
     /**
-     * @ORM\Column(type="longtext", nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      * 
      * @Groups({"users_list", "user_detail"})
      */
