@@ -7,6 +7,7 @@ use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\SerializerInterface;
@@ -59,7 +60,7 @@ class UserController extends AbstractController
      * 
      * 
      */
-    public function add(Request $request, SerializerInterface $serialiser, ValidatorInterface $validator)
+    public function add(Request $request, SerializerInterface $serialiser, ValidatorInterface $validator,  UserPasswordHasherInterface $passwordEncoder)
     {
         // We get the json information
         $jsonData = $request->getContent();
@@ -69,6 +70,13 @@ class UserController extends AbstractController
         //We turn json data in object
         $user = $serialiser->deserialize($jsonData, User::class, 'json');        
         
+        $user->setPassword(
+            $passwordEncoder->hashPassword(
+                $user,
+                $user->getPassword()
+            )
+        );
+
         // dd($user);
 
         //To save we call the manager
