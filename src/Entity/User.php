@@ -56,8 +56,9 @@ class User
      */
     private $lastname;
 
+
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      * 
      * @Groups({"users_list", "user_detail"})
      */
@@ -127,6 +128,13 @@ class User
     private $email;
 
     /**
+     * @var string The hashed password
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"users_list", "user_detail"})
+     */
+    private $password;
+
+    /**
      * @ORM\Column(type="string", length=128, nullable=true)
      * 
      * @Groups({"users_list", "user_detail"})
@@ -182,6 +190,8 @@ class User
      * @Groups({"users_list", "user_detail"})
      */
     private $participation;
+
+    
 
     public function __construct()
     {
@@ -366,6 +376,18 @@ class User
         return $this;
     }
 
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
     public function getSlug(): ?string
     {
         return $this->slug;
@@ -539,4 +561,6 @@ class User
 
         return $this;
     }
+
+    
 }

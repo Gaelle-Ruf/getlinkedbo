@@ -11,7 +11,7 @@
         {% if app.user %}
             Bienvenue dans le Backoffice de GetLinked {{app.adminuser.firstname}} !
         {% else %}
-            <a href="{{ path('app_login') }}" class="btn btn-danger my-2">Se connecter</a>            
+            <a href="{# {{ path('app_login') }} #}" class="btn btn-danger my-2">Se connecter</a>            
         {% endif %}
         </p>
     </div>
