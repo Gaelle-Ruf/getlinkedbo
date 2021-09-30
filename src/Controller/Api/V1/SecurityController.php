@@ -1,29 +1,33 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Api\V1;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
+/**
+ * @Route("/api/v1")
+ */
 class SecurityController extends AbstractController
 {
     /**
-     * @Route("/login", name="app_login")
+     * @Route("/login", name="login")
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        if ($this->getUser()) {  
+        /* if ($this->getUser()) {  
              return $this->redirectToRoute('target_path');
-        }
+        } */
 
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
+        // TODO return token infos users
+        /* return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]); */
     }
 
     /**
