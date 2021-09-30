@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Api\V1;
+namespace App\Controller\Backoffice;
 
 use App\Repository\Api\V1\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
