@@ -6,8 +6,9 @@ use App\Entity\AdminUser;
 use App\Entity\User;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\AuthenticationSuccessEvent;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\UserProviderInterface;
 
-class AuthenticationSuccessListener {
+class AuthenticationSuccessListener{
 
     /**
      * @param AuthenticationSuccessEvent $event
