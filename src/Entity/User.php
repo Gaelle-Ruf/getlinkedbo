@@ -209,10 +209,17 @@ class User implements UserInterface
     { return array('ROLE_USER');}
 
 
-    public function getSalt(){}    
+    public function getSalt(): ?string
+    { return null;}  
+
     public function eraseCredentials(){}
-    public function getUsername(){}
-    public function getUseIdentifier(){}
+
+    public function getUsername(): string 
+    { return (string) $this->email;}
+
+    public function getUserIdentifier(): string 
+    { return (string) $this->email;}
+
 
     public function getId(): ?int
     {
