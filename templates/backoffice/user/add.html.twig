@@ -4,9 +4,9 @@
 
     <h2>Ajout d'un utilisateur</h2>
     {{ form_start(formView, {'attr': {'novalidate': 'novalidate'}}) }}
-    {{ form_row(formView.name, {'attr': {'class':'geronimo'}}) }}
-    {{ form_end(formView) }}
+    {{ form_row(formView, {'attr': {'class':'geronimo'}}) }}
     <button class="btn btn-primary">Valider</button>
+    {{ form_end(formView) }}
 
     <p>
         <a href="{{ path('backoffice_user_index') }}">Retour à la liste</a>

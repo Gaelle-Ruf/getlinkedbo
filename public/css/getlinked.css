@@ -38,3 +38,11 @@ footer{
     color:black !important;
     
 }
+
+h2, a, ul, h3, li {
+    color: white;
+}
+
+a {
+    text-decoration: none;
+}
