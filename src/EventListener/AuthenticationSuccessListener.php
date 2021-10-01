@@ -18,12 +18,12 @@ class AuthenticationSuccessListener{
         $data = $event->getData();
         $user = $event->getUser();
 
-        if (!$user instanceof AdminUser && $user instanceof User) {
+        if (!$user instanceof AdminUser && !$user instanceof User) {
             return;
         }
 
         $data['data'] = array(
-            'email' =>  $user('test@test.test'),
+            'email' =>  $user->getEmail(),
             'firstname' =>  $user->getFirstname(),
             'lastname' =>  $user->getLastname(),
         );
