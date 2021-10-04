@@ -28,8 +28,9 @@ class StyleController extends AbstractController
         $styles = $styleRepository->findAll();
         // dd($styles);
 
-        return $this->json($styles, 200, [], []);
+        return $this->json($styles, 200, [], ['groups' => 'styles_list']);
     }
+
 
     /**
      * 
@@ -46,14 +47,14 @@ class StyleController extends AbstractController
         }
         // dd($style);
 
-        return $this->json($style, 200, [], []
+        return $this->json($style, 200, [], ['groups' => 'style_detail']
     );
     // 'groups' => 'style_detail'
     }
 
     /**
      * 
-     * URL : /api/v1/users/
+     * URL : /api/v1/styles/
      * 
      * @Route("/", name="add", methods={"POST"})
      * 

@@ -49,6 +49,7 @@ class UserController extends AbstractController
     {
         $user = $userRepository->find($id);
         
+        // dd($user);
         if(!$user) {
             return $this->json([
                 'error' => 'L\'utilisateur ' . $id . ' n\'existe pas'
