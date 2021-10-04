@@ -41,6 +41,7 @@ class User implements UserInterface
      * @Groups({"users_list", "user_detail"})
      * @Groups({"events_list", "event_detail"})
      * @Groups({"comments_list", "comment_detail"})
+     *  @Groups({"styles_list", "style_detail"})
      */
     private $name;
 
@@ -48,6 +49,7 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=64)
      * 
      * @Groups({"users_list", "user_detail"})
+     *
      */
     private $firstname;
 
@@ -132,6 +134,7 @@ class User implements UserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string", length=255, nullable=true)
+     * 
      * @Groups({"users_list", "user_detail"})
      */
     private $password;
@@ -581,4 +584,4 @@ class User implements UserInterface
     }
 
     
-}
+ }
