@@ -19,6 +19,7 @@ class Category
      * @ORM\Column(type="integer")
      * 
      * @Groups({"users_list", "user_detail"})
+     * @Groups({"categories_list", "category_detail"})
      * @Groups({"events_list", "event_detail"})
      */
     private $id;

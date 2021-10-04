@@ -19,6 +19,7 @@ class Style
      * @ORM\Column(type="integer")
      * 
      * @Groups({"users_list", "user_detail"})
+     * @Groups({"styles_list", "style_detail"})
      * 
      */
     private $id;
