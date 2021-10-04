@@ -18,7 +18,7 @@ class Style
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      * 
-     * @Groups({"users_list", "user_detail"})
+     * @Groups({"styles_list", "style_detail"})
      * 
      */
     private $id;
@@ -27,6 +27,7 @@ class Style
      * @ORM\Column(type="string", length=64)
      * 
      * @Groups({"users_list", "user_detail"})
+     * @Groups({"styles_list", "style_detail"})
      * 
      */
     private $name;
@@ -52,7 +53,6 @@ class Style
     /**
      * @ORM\ManyToMany(targetEntity=Event::class, mappedBy="style")
      * 
-     * @Groups({"users_list", "user_detail"})
      * @Groups({"events_list", "event_detail"})
      */
     private $events;
@@ -60,8 +60,8 @@ class Style
     /**
      * @ORM\ManyToMany(targetEntity=User::class, mappedBy="style")
      * 
-     * @Groups({"users_list", "user_detail"})
      * @Groups({"events_list", "event_detail"})
+     * @Groups({"styles_list", "style_detail"})
      */
     private $users;
 

@@ -7,13 +7,15 @@ use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\Groups;
+
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  */
-class User
+class User implements UserInterface
 {
     /**
      * @ORM\Id
@@ -39,6 +41,7 @@ class User
      * @Groups({"users_list", "user_detail"})
      * @Groups({"events_list", "event_detail"})
      * @Groups({"comments_list", "comment_detail"})
+     *  @Groups({"styles_list", "style_detail"})
      */
     private $name;
 
@@ -46,6 +49,7 @@ class User
      * @ORM\Column(type="string", length=64)
      * 
      * @Groups({"users_list", "user_detail"})
+     *
      */
     private $firstname;
 
@@ -56,8 +60,9 @@ class User
      */
     private $lastname;
 
+
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      * 
      * @Groups({"users_list", "user_detail"})
      */
@@ -127,6 +132,14 @@ class User
     private $email;
 
     /**
+     * @var string The hashed password
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * 
+     * @Groups({"users_list", "user_detail"})
+     */
+    private $password;
+
+    /**
      * @ORM\Column(type="string", length=128, nullable=true)
      * 
      * @Groups({"users_list", "user_detail"})
@@ -183,6 +196,8 @@ class User
      */
     private $participation;
 
+    
+
     public function __construct()
     {
         $this->events = new ArrayCollection();
@@ -191,6 +206,22 @@ class User
         $this->comment = new ArrayCollection();
         $this->participation = new ArrayCollection();
     }
+
+
+    public function getRoles(): array 
+    { return array('ROLE_USER');}
+
+
+    public function getSalt(): ?string
+    { return null;}  
+
+    public function eraseCredentials(){}
+
+    public function getUsername(): string 
+    { return (string) $this->email;}
+
+    public function getUserIdentifier(): string 
+    { return (string) $this->email;}
 
 
     public function getId(): ?int
@@ -362,6 +393,18 @@ class User
     public function setEmail(string $email): self
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
 
         return $this;
     }
@@ -539,4 +582,6 @@ class User
 
         return $this;
     }
-}
+
+    
+ }

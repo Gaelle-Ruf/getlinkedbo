@@ -3,17 +3,26 @@
 namespace App\Controller\Api\V1;
 
 use App\Entity\User;
+use App\Repository\CategoryRepository;
+use App\Repository\CommentRepository;
+use App\Repository\EventRepository;
+use App\Repository\ParticipationRepository;
+use App\Repository\StyleRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
+
+
 /**
- * @Route("/api/v1/users", name="api_v1_user")
+ * @Route("/api/v1/users", name="api_v1_user") 
  */
 class UserController extends AbstractController
 {
@@ -40,6 +49,7 @@ class UserController extends AbstractController
     {
         $user = $userRepository->find($id);
         
+        // dd($user);
         if(!$user) {
             return $this->json([
                 'error' => 'L\'utilisateur ' . $id . ' n\'existe pas'
@@ -59,17 +69,25 @@ class UserController extends AbstractController
      * 
      * 
      */
-    public function add(Request $request, SerializerInterface $serialiser, ValidatorInterface $validator)
+    public function add(Request $request, SerializerInterface $serialiser, ValidatorInterface $validator,  UserPasswordHasherInterface $passwordEncoder)
     {
         // We get the json information
-        $jsonData = $request->getContent();
+        $jsonData = $request->getContent();    
+         
 
-        
+        /* dd($data->password); */
 
         //We turn json data in object
-        $user = $serialiser->deserialize($jsonData, User::class, 'json');        
+        $user = $serialiser->deserialize($jsonData, User::class, 'json');       
+        /* dd($user); */
+        $user->setPassword(
+            $passwordEncoder->hashPassword(
+                $user,
+                $user->getPassword()
+            )
+        );
+
         
-        // dd($user);
 
         //To save we call the manager
         $em = $this->getDoctrine()->getManager();
