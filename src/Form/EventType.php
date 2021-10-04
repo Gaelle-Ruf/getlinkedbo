@@ -16,6 +16,7 @@ class EventType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('user')
             ->add('name')
             ->add('address')
             ->add('date')
@@ -40,8 +41,7 @@ class EventType extends AbstractType
             ->add('email')
             ->add('createdAt', DateTimeType::class, [
                 'widget' => 'single_text',
-                'input' => 'datetime_immutable',
-            ]);
+                'input' => 'datetime_immutable',]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

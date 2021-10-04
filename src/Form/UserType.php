@@ -36,7 +36,6 @@ class UserType extends AbstractType
                 ],
             ])
             ->add('description')
-            ->add('schedule')
             ->add('nbMembers')
             ->add('address')
             ->add('website')

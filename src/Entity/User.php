@@ -192,7 +192,6 @@ class User
         $this->participation = new ArrayCollection();
     }
 
-
     public function getId(): ?int
     {
         return $this->id;

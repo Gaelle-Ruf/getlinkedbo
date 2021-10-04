@@ -11,7 +11,7 @@
             {% for user in users %}
                 <li>
                     <a href="{{ path('backoffice_user_show', {id:user.id}) }}">
-                        {{ user.name }}
+                        {{ user.type.artiste }}
                     </a>
                 </li>
             {% endfor %}
