@@ -62,7 +62,7 @@ class Style
      * @ORM\ManyToMany(targetEntity=User::class, mappedBy="style")
      * 
      * @Groups({"events_list", "event_detail"})
-     * @Groups({"styles_list", "style_detail"})
+     * 
      */
     private $users;
 
