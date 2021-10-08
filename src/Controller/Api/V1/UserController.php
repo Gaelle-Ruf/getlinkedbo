@@ -9,6 +9,7 @@ use App\Repository\EventRepository;
 use App\Repository\ParticipationRepository;
 use App\Repository\StyleRepository;
 use App\Repository\UserRepository;
+use Swift_Mailer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -70,6 +71,7 @@ class UserController extends AbstractController
      * 
      */
     public function add(Request $request, SerializerInterface $serialiser, ValidatorInterface $validator,  UserPasswordHasherInterface $passwordEncoder)
+    
     {
         // We get the json information
         $jsonData = $request->getContent();    
@@ -95,6 +97,13 @@ class UserController extends AbstractController
         $em->flush();
 
         // dd($jsonData, $user);
+
+        //$message = (new \Swift_Message('Activation de votre compte'))
+            //        ->setFrom('getlinked.pro@gmail.com')
+             //       ->setTo(/* $user-> getEmail() */ 'getlinked.pro@gmail.com')
+            //        ->setBody("Bienvenue dans la communauté GetLinked ! <br> 
+              //                  Nous sommes heureux de vous compter parmi nos linkers");
+            //$mailer->send($message);
 
         //We return an answer telling the ressource has been created with the 201 code.
         return $this->json($user, 201, [], []);
