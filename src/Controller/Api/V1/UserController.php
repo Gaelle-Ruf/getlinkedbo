@@ -70,7 +70,7 @@ class UserController extends AbstractController
      * 
      * 
      */
-    public function add(Request $request, SerializerInterface $serialiser, ValidatorInterface $validator,  UserPasswordHasherInterface $passwordEncoder, Swift_Mailer $mailer)
+    public function add(Request $request, SerializerInterface $serialiser, ValidatorInterface $validator,  UserPasswordHasherInterface $passwordEncoder)
     
     {
         // We get the json information
@@ -98,12 +98,12 @@ class UserController extends AbstractController
 
         // dd($jsonData, $user);
 
-        $message = (new \Swift_Message('Activation de votre compte'))
-                    ->setFrom('getlinked.pro@gmail.com')
-                    ->setTo(/* $user-> getEmail() */ 'getlinked.pro@gmail.com')
-                    ->setBody("Bienvenue dans la communauté GetLinked ! <br> 
-                                Nous sommes heureux de vous compter parmi nos linkers");
-            $mailer->send($message);
+        //$message = (new \Swift_Message('Activation de votre compte'))
+            //        ->setFrom('getlinked.pro@gmail.com')
+             //       ->setTo(/* $user-> getEmail() */ 'getlinked.pro@gmail.com')
+            //        ->setBody("Bienvenue dans la communauté GetLinked ! <br> 
+              //                  Nous sommes heureux de vous compter parmi nos linkers");
+            //$mailer->send($message);
 
         //We return an answer telling the ressource has been created with the 201 code.
         return $this->json($user, 201, [], []);
