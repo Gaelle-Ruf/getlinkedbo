@@ -54,7 +54,7 @@ class Style
     /**
      * @ORM\ManyToMany(targetEntity=Event::class, mappedBy="style")
      * 
-     * @Groups({"events_list", "event_detail"})
+     * @Groups({"styles_list", "style_detail"})
      */
     private $events;
 
