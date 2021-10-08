@@ -106,7 +106,7 @@ class UserController extends AbstractController
             //$mailer->send($message);
 
         //We return an answer telling the ressource has been created with the 201 code.
-        return $this->json($user, 201, [], []);
+        return $this->json($user, 201, [], ['groups' => 'user_detail']);
 
     }
 
