@@ -70,11 +70,8 @@ class UserController extends AbstractController
      * 
      * 
      */
-<<<<<<< HEAD
-    public function add(Request $request, SerializerInterface $serialiser, ValidatorInterface $validator,  UserPasswordHasherInterface $passwordEncoder)
-=======
-    public function add(Request $request, SerializerInterface $serialiser, ValidatorInterface $validator, Swift_Mailer $mailer)
->>>>>>> feature/user-registration-by-email
+    public function add(Request $request, SerializerInterface $serialiser, ValidatorInterface $validator,  UserPasswordHasherInterface $passwordEncoder, Swift_Mailer $mailer)
+    
     {
         // We get the json information
         $jsonData = $request->getContent();    
