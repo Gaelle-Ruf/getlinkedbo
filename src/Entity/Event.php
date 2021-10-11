@@ -51,7 +51,7 @@ class Event
     private $date;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      * 
      * @Groups({"events_list", "event_detail"})
      * 
