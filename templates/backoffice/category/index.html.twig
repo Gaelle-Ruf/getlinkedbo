@@ -1,23 +1,44 @@
 {% extends 'backoffice/layout.html.twig' %}
 
 {% block title %}
-    Catégories
+    Catégories -
+    {{parent()}}
 {% endblock %}
 
-{% block content %}
-    <main>
-        <h2>Catégories</h2>
-        <p>
-            <a href="{{ path('backoffice_category_add') }}">Ajouter</a>
-        </p>
-        <ul>
-            {% for category in categories %}
-                <li>
-                    <a href="{{ path('backoffice_category_show', {id:category.id}) }}">
-                        {{ category.name }}
-                    </a>
-                </li>
+{% block body %}
+<h1>Liste des catégories</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            {% for category in categorys %}
+                <tr>
+                    <td>{{ category.id }}</td>
+                    <td>{{ category.name }}</td>
+                    <td>{{ category.createdAt ? category.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ category.updatedAt ? category.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <a href="{{ path('backoffice_category_show', {id:category.id}) }}" class="btn btn-dark my-2 my-sm-0 col-sd-1">Voir</a>
+                            <a href="{{ path('backoffice_category_edit', {id:category.id}) }}" class="btn btn-dark my-2 my-sm-0 col-sd-1">Modifier</a>                     
+                        </div>
+                    </td>
+                        
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="9">Aucune categorie trouvée</td>
+                </tr>
             {% endfor %}
-        </ul>
-    </main>
+        </tbody>
+    </table>
+
+    <a href="{{ path('backoffice_category_add') }}" class="btn btn-dark my-2 my-sm-0 col-sd-1">Ajouter</a>
 {% endblock %}
+

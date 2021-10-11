@@ -1,15 +1,20 @@
-{% extends "backoffice/layout.html.twig" %}
+{% extends 'backoffice/layout.html.twig' %}
+
+{% block title %}Modifier une catégorie
+{% endblock %}
 
 {% block content %}
-
-    <h2>Edition d'une catégorie</h2>
-    {{ form_start(formView, {'attr': {'novalidate': 'novalidate'}}) }}
-    {{ form_row(formView.name, {'attr': {'class':'geronimo'}}) }}
-    <button class="btn btn-primary">Valider</button>
-    {{ form_end(formView) }}
+    <h1>Modifier une catégorie</h1>
 
     <p>
-        <a href="{{ path('backoffice_category_index') }}">Retour à la liste</a>
+        <a href="{{ path('backoffice_category_index', {id:category.id}) }}" class="btn btn-dark my-2 my-sm-0 col-sd-1">Tous les categories</a>
+        |
+        <a href="{{ path('backoffice_category_add', {id:category.id}) }}" class="btn btn-dark my-2 my-sm-0 col-sd-1">Ajouter une categorie</a>
     </p>
 
+    {{ include('backoffice/category/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('backoffice_category_index') }}">Retour à la liste</a>
+
+    {{ include('backoffice/category/_delete_form.html.twig') }}
 {% endblock %}
