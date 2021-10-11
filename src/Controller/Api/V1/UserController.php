@@ -100,7 +100,6 @@ class UserController extends AbstractController
                 $user->getPassword()
             )
         );
-
         
 
         //To save we call the manager
