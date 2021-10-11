@@ -34,6 +34,23 @@ class EventController extends AbstractController
     );
     }
 
+      /**
+     * URL : /api/v1/events/home
+     * Route : api_v1_user_home
+     * 
+     * @Route("/home", name="home", methods={"GET"})
+     */
+    public function home(EventRepository $eventRepository): Response
+    {
+       
+        // we get the 4 last events created
+        $latestEvents = $eventRepository->findBy([], ['id' => 'DESC'], 4);
+
+        // dd ($latestUsers);
+        return $this->json($latestEvents, 200, [], ['groups' => 'events_list']);
+
+    }
+
     /**
      * 
      * @Route("/{id}", name="show", methods={"GET"})

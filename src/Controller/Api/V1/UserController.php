@@ -3,11 +3,6 @@
 namespace App\Controller\Api\V1;
 
 use App\Entity\User;
-use App\Repository\CategoryRepository;
-use App\Repository\CommentRepository;
-use App\Repository\EventRepository;
-use App\Repository\ParticipationRepository;
-use App\Repository\StyleRepository;
 use App\Repository\UserRepository;
 use Swift_Mailer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -40,6 +35,23 @@ class UserController extends AbstractController
         // dd($users);
         return $this->json($users, 200, [], ['groups' => 'users_list']
     );
+    }
+
+    /**
+     * URL : /api/v1/users/home
+     * Route : api_v1_user_home
+     * 
+     * @Route("/home", name="home", methods={"GET"})
+     */
+    public function home(UserRepository $userRepository): Response
+    {
+       
+        // we get the 4 last users created
+        $latestUsers = $userRepository->findBy([], ['id' => 'DESC'], 4);
+
+        // dd ($latestUsers);
+        return $this->json($latestUsers, 200, [], ['groups' => 'users_list']);
+
     }
 
     /**
