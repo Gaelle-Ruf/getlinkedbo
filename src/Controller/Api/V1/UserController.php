@@ -93,7 +93,7 @@ class UserController extends AbstractController
 
         //We turn json data in object
         $user = $serialiser->deserialize($jsonData, User::class, 'json');       
-        /* dd($user); */
+        // dd($user);
         $user->setPassword(
             $passwordEncoder->hashPassword(
                 $user,
