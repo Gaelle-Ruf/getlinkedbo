@@ -13,73 +13,96 @@ use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 /**
-* @Route("/backoffice/admin/user", name="backoffice_admin_user_")
+* @Route("/backoffice/adminuser", name="backoffice_adminuser_")
 */
 class AdminUserController extends AbstractController
 {
     
     /**
-     * catch all adminusers
-     * 
      * @Route("/", name="index", methods={"GET"})
      */
     public function index(AdminUserRepository $adminUserRepository): Response
     {
-        return $this->render('backoffice/admin_user/index.html.twig', [
-            'adminusers' => $adminUserRepository->findAll(),
+        return $this->render('backoffice/adminuser/index.html.twig', [
+            'adminusers' => $adminUserRepository->findAll(),]);
+    }
+
+    /**
+     * @Route("/{id}", name="show", methods={"GET"})
+     * 
+     */
+    public function show(int $id, AdminUserRepository $adminUserRepository)
+    {
+        $adminuser = $adminUserRepository->find($id);
+        if (!$adminuser) {
+            throw $this->createNotFoundException('L\administrateur ' . $id . ' n\'existe pas');
+        }
+        return $this->render('backoffice/adminuser/show.html.twig', [
+            'adminuser' => $adminuser
         ]);
     }
 
-
     /**
-     * create a new adminuser
-     * 
-     * @Route("/new", name="new", methods={"GET","POST"})
-     * 
-     * */
-    public function new(Request $request, UserPasswordHasherInterface $passwordHasher): Response
+     * @Route("/add", name="add", methods={"GET","POST"})
+     */
+    public function add(Request $request)
     {
         $adminuser = new AdminUser();
+        $form = $this->createForm(AdminUserType::class, $adminuser);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($adminuser);
+            $em->flush();
+
+            $this->addFlash('success', 'L\administrateur ' . $adminuser->getFirstname() . $adminuser->getLastname() .' a bien été créé');
+
+            return $this->redirectToRoute('backoffice_adminuser_index');
+        }
+
+        return $this->render('backoffice/adminuser/add.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/{id}/edit", name="edit", methods={"GET","POST"})
+     */
+    public function edit(AdminUser $adminuser, Request $request)
+    {
         $form = $this->createForm(AdminUserType::class, $adminuser);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            /* hash password  */
-            $adminuser->setPassword(
-                $passwordHasher->hashPassword(
-                    $adminuser,
-                    $form->get('plainPassword')->getData()
-                )
-            );
 
+            $adminuser->getFirstname();
+            /* setUpdatedAt(new DateTimeImmutable()) */
 
+            $this->getDoctrine()->getManager()->flush();
 
+            $this->addFlash('success', 'L\administrateur ' . $adminuser->getFirstname() . $adminuser->getLastname() . ' a bien été modifié');
 
-
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($adminuser);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('backoffice_adminuser_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('backoffice/admin_user/new.html.twig', [
+        return $this->renderForm('backoffice/adminuser/edit.html.twig', [
             'adminuser' => $adminuser,
-            'form' => $form,
+            'form' => $form
         ]);
     }
 
-
     /**
-     * catch one adminuser by id
-     * 
-     * @Route("/{id}", name="show", methods={"GET"})
+     * @Route("/{id}/delete", name="delete", methods={"POST"})
      */
-    public function show(AdminUser $adminUser): Response
+    public function delete(AdminUser $adminuser)
     {
-        return $this->render('backoffice/admin_user/show.html.twig', [
-            'adminuser' => $adminUser
-        ]);
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($adminuser);
+        $em->flush();
+        $this->addFlash('info', 'L\'administrateur ' . $adminuser->getFirstname() . $adminuser->getLastname() . ' a bien été supprimé');
+        return $this->redirectToRoute('backoffice_adminuser_index');
     }
 
     
