@@ -1,0 +1,15 @@
+{% extends "backoffice/layout.html.twig" %}
+
+{% block body %}
+
+    <h2>Modification d'un événement</h2>
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+        {{ form_row(form.name, {'attr': {'class':'geronimo'}}) }}
+    {{ form_end(form) }}
+    <button class="btn btn-dark my-2 my-sm-0 col-sd-1">Valider</button>
+
+    <p>
+        <a href="{{ path('backoffice_event_index') }}" class="btn btn-dark my-2 my-sm-0 col-sd-1">Retour à la liste</a>
+    </p>
+
+{% endblock %}

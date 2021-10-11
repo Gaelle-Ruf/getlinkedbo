@@ -68,6 +68,8 @@ class AdminUser implements UserInterface, PasswordAuthenticatedUserInterface
     { 
         
         $this->createdAt = new DateTimeImmutable();
+        $this->updatedAt = new DateTimeImmutable();
+        
     }
 
     public function getId(): ?int

@@ -1,23 +1,54 @@
 {% extends 'backoffice/layout.html.twig' %}
 
 {% block title %}
-    Événements
+    Événements -
+    {{parent()}}
 {% endblock %}
 
-{% block content %}
-    <main>
-        <h2>Événements</h2>
-        <p>
-            <a href="{{ path('backoffice_event_add') }}">Ajouter</a>
-        </p>
-        <ul>
+{% block body %}
+<h1>Liste des événements</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Adresse</th>
+                {# <th>Date</th> #}
+                <th>Visuel</th>
+                <th>Description</th>
+                <th>Contact</th>
+            </tr>
+        </thead>
+        <tbody>
             {% for event in events %}
-                <li>
-                    <a href="{{ path('backoffice_event_show', {id:event.id}) }}">
-                        {{ event.name }}
-                    </a>
-                </li>
+                <tr>
+                    <td>{{ event.id }}</td>
+                    <td>{{ event.name }}</td>
+                    <td>{{ event.address }}</td>                    
+                    <td>                        
+                        <img src="{{ event.picture }}" width="100">
+                    </td>
+                    <td>{{ event.description  | u.truncate(100, '...') }}</td>
+                    <td>{{ event.email }}</td>
+                    {# <td>{{ event.createdAt ? event.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ event.updatedAt ? event.updatedAt|date('Y-m-d H:i:s') : '' }}</td> #}
+                    <td>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <a href="{{ path('backoffice_event_show', {id:event.id}) }}" class="btn btn-dark my-2 my-sm-0 col-sd-1">Voir</a>
+                        <a href="{{ path('backoffice_event_edit', {id:event.id}) }}" class="btn btn-dark my-2 my-sm-0 col-sd-1">Modifier</a>                     
+                    </div>
+                    </td>
+                        
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="9">Aucun événement trouvé</td>
+                </tr>
             {% endfor %}
-        </ul>
-    </main>
+        </tbody>
+    </table>
+
+    <a href="{{ path('backoffice_event_add') }}" class="btn btn-dark my-2 my-sm-0 col-sd-1">Ajouter</a>
 {% endblock %}
+
