@@ -168,14 +168,14 @@ class User implements UserInterface
     private $events;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Category::class, inversedBy="users")
+     * @ORM\ManyToMany(targetEntity=Category::class, inversedBy="users", cascade={"persist"})
      * 
      * @Groups({"users_list", "user_detail"})
      */
     private $category;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Style::class, inversedBy="users")
+     * @ORM\ManyToMany(targetEntity=Style::class, inversedBy="users", cascade={"persist"})
      * 
      * @Groups({"users_list", "user_detail"})
      */
