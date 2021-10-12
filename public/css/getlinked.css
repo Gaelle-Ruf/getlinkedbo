@@ -22,6 +22,12 @@ body {
     background-color: none; 
     font-weight: bold;
     background-color: none;    
+    opacity: 0.8;    
+}
+
+.navbar-nav > li{
+    padding-left:20px;
+    padding-right:20px;
 }
 
 .btn, footer, .dropdown-menu {

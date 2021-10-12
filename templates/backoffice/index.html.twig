@@ -7,7 +7,14 @@
     <div class="content container">
         <h2>GetLinked</h2>
         <p>
-            Bienvenue sur le Backoffice !
+            {% if app.user %}
+                Bienvenue
+                {{ app.user.firstname }} !
+            {% else %}
+                <p>
+                    Bienvenue sur le Backoffice !
+                </p>
+            {% endif %}
         </p>
     </div>
 {% endblock %}
