@@ -20,12 +20,51 @@ class UserController extends AbstractController
      * @Route("/", name="index", methods={"GET"})
      */
     public function index(UserRepository $userRepository): Response
-    {
+    {   
+
         return $this->render('backoffice/user/index.html.twig', [
             'users' => $userRepository->findAll(),]);
+            /* 'artistusers' => $artistUser,
+            'promoterusers' => $promoterUser */
+                
+        
+    }
+    
+    /**
+     * @Route("/artists", name="artists", methods={"GET"})
+     */
+    public function indexOfArtists(UserRepository $userRepository): Response
+    { 
+        $artists = $userRepository->findByType(
+                ['type' => 'artiste'],
+                ['name' => 'ASC'],
+                $limit = null,
+                $offset = null
+        );        
+
+        return $this->render('backoffice/user/_artist.html.twig', [
+            'artists' => $artists
+        ]);
     }
 
-    
+
+    /**
+     * @Route("/promoters", name="promoters", methods={"GET"})
+     */
+    public function indexOfPromoters(UserRepository $userRepository): Response
+    { 
+        $promoters = $userRepository->findByType(
+                ['type' => 'organisateur'],
+                ['name' => 'ASC'],
+                $limit = null,
+                $offset = null
+        );        
+
+        return $this->render('backoffice/user/_promoter.html.twig', [
+            'promoters' => $promoters
+        ]);
+    }
+
 
     /**
      * @Route("/{id}", name="show", methods={"GET"})
@@ -34,7 +73,7 @@ class UserController extends AbstractController
     {
         $user = $userRepository->find($id);
         if (!$user) {
-            throw $this->createNotFoundException('L\'utilisateur  ' . $id . ' n\'existe pas');
+            throw $this->createNotFoundException('Le Linker  ' . $id . ' n\'existe pas');
         }
         return $this->render('backoffice/user/show.html.twig', [
             'user' => $user
@@ -53,7 +92,7 @@ class UserController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
-            $this->addFlash('success', 'L\'utilisateur  ' . $user->getName() . ' a bien été créée');
+            $this->addFlash('success', 'Le Linker  ' . $user->getName() . ' a bien été créée');
             return $this->redirectToRoute('backoffice_user_index');
         }
         return $this->render('backoffice/user/add.html.twig', [
@@ -75,7 +114,7 @@ class UserController extends AbstractController
 
             $this->getDoctrine()->getManager()->flush();
 
-            $this->addFlash('success', 'L\'utilisateur ' . $user->getName() . ' a bien été modifié');
+            $this->addFlash('success', 'Le Linker ' . $user->getName() . ' a bien été modifié');
 
             return $this->redirectToRoute('backoffice_user_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -94,7 +133,7 @@ class UserController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $em->remove($user);
         $em->flush();
-        $this->addFlash('info', 'L\'utilisateur  ' . $user->getName() . ' a bien été supprimé');
+        $this->addFlash('info', 'Le Linker  ' . $user->getName() . ' a bien été supprimé');
         return $this->redirectToRoute('backoffice_user_index');
     }
 }

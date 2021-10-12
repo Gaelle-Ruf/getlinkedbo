@@ -5,21 +5,20 @@
     {{parent()}}
 {% endblock %}
 
-{% block content %}
-<h1>Liste des utilisateurs</h1>
+{% block body %}
+<h1>Tous les Linkers</h1>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Pseudo</th>
+                <th>Nom</th>
                 <th>Prénom</th>
-                <th>Nom</th>                
-                <th>Visuel</th>
+                <th>Avatar</th>
                 <th>Description</th>
-                <th>Contact</th>
-                <th>Membre depuis le</th>
-                <th>Mis à jour le</th>
+                <th>Membres du groupe</th>
+                <th>Email</th>
             </tr>
         </thead>
         <tbody>
@@ -27,31 +26,32 @@
                 <tr>
                     <td>{{ user.id }}</td>
                     <td>{{ user.name }}</td>
-                    <td>{{ user.firstname }}</td> 
-                    <td>{{ user.lastname }}</td>                   
+                    <td>{{ user.lastname }}</td>
+                    <td>{{ user.firstname }}</td>
                     <td>                        
                         <img src="{{ user.picture }}" width="100">
                     </td>
                     <td>{{ user.description  | u.truncate(100, '...') }}</td>
+                    <td>{{ user.nbMembers }}</td>
                     <td>{{ user.email }}</td>
-                    <td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                    <td>{{ user.updatedAt ? user.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                    {# <td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ user.updatedAt ? user.updatedAt|date('Y-m-d H:i:s') : '' }}</td> #}
                     <td>
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <a href="{{ path('backoffice_user_show', {id:user.id}) }}" class="btn btn-dark my-2 my-sm-0 col-sd-1">Voir</a>
-                        <a href="{{ path('backoffice_user_edit', {id:user.id}) }}" class="btn btn-dark my-2 my-sm-0 col-sd-1">Modifier</a>                     
+                        <a href class="btn btn-dark my-2 my-sm-0 col-sd-1""{{ path('backoffice_user_show', {'id': user.id}) }}">Voir</a>
+                        <a href class="btn btn-dark my-2 my-sm-0 col-sd-1""{{ path('backoffice_user_edit', {'id': user.id}) }}">Modifier</a>
                     </div>
                     </td>
                         
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="9">Aucun utilisateur trouvé</td>
+                    <td colspan="9">Aucun linker trouvé</td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('backoffice_user_add') }}" class="btn btn-dark my-2 my-sm-0 col-sd-1">Ajouter</a>
+    <a href="{{ path('backoffice_user_add') }}">Ajouter</a>
 {% endblock %}
 
