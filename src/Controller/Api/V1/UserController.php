@@ -180,9 +180,9 @@ class UserController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $em->flush();
 
-        return $this->json([
+        return $this->json($user, 200, [
             'message' => 'L\'utilisateur ' . $user->getName() . ' a bien été mise à jour'
-        ]);
+        ], ['groups' => 'user_detail']);
     }
 
     /**
