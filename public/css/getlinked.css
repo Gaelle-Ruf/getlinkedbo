@@ -90,6 +90,8 @@ footer {
 
 main.col-md-9.ml-sm-auto.col-lg-10.pt-3.px-4 {
     width: fit-content;
+    max-width: 80vw;
+    overflow: auto;
 }
 
 .row {
@@ -99,4 +101,9 @@ main.col-md-9.ml-sm-auto.col-lg-10.pt-3.px-4 {
 
 button.btn {
     color: white;
+}
+
+form {
+    width: 100%;
+    padding: 1rem;
 }
