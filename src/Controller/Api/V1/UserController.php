@@ -46,7 +46,7 @@ class UserController extends AbstractController
     public function home(UserRepository $userRepository): Response
     {
        
-        $latestArtist = $userRepository->findByType(
+        $latestArtist = $userRepository->findByArtist(
             ['type' => 'artiste'],
             ['id' => 'DESC'],
             $limit = 4,

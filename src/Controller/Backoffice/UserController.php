@@ -25,6 +25,8 @@ class UserController extends AbstractController
             'users' => $userRepository->findAll(),]);
     }
 
+    
+
     /**
      * @Route("/{id}", name="show", methods={"GET"})
      */
