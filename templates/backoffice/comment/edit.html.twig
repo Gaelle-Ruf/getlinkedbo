@@ -1,15 +1,20 @@
-{% extends "backoffice/layout.html.twig" %}
+{% extends 'backoffice/layout.html.twig' %}
+
+{% block title %}Modifier un commentaire
+{% endblock %}
 
 {% block content %}
-
-    <h2>Edition d'un commentaire</h2>
-    {{ form_start(formView, {'attr': {'novalidate': 'novalidate'}}) }}
-    {{ form_row(formView.name, {'attr': {'class':'geronimo'}}) }}
-    <button class="btn btn-primary">Valider</button>
-    {{ form_end(formView) }}
+    <h1>Modifier un commentaire</h1>
 
     <p>
-        <a href="{{ path('backoffice_comment_index') }}">Retour à la liste</a>
+        <a href="{{ path('backoffice_comment_index', {id:comment.id}) }}" class="btn btn-dark my-2 my-sm-0 col-sd-1">Tous les commentaires</a>
+        |
+        <a href="{{ path('backoffice_comment_add', {id:comment.id}) }}" class="btn btn-dark my-2 my-sm-0 col-sd-1">Ajouter un commentaire</a>
     </p>
 
+    {{ include('backoffice/comment/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('backoffice_comment_index') }}">Retour à la liste</a>
+
+    {{ include('backoffice/comment/_delete_form.html.twig') }}
 {% endblock %}

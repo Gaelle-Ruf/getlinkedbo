@@ -1,23 +1,44 @@
 {% extends 'backoffice/layout.html.twig' %}
 
 {% block title %}
-    Styles
+    Styles -
+    {{parent()}}
 {% endblock %}
 
 {% block content %}
-    <main>
-        <h2>Styles</h2>
-        <p>
-            <a href="{{ path('backoffice_style_add') }}">Ajouter</a>
-        </p>
-        <ul>
+<h1>Liste des styles</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                
+            </tr>
+        </thead>
+        <tbody>
             {% for style in styles %}
-                <li>
-                    <a href="{{ path('backoffice_style_show', {id:style.id}) }}">
-                        {{ style.name }}
-                    </a>
-                </li>
+                <tr>
+                    <td>{{ style.id }}</td>
+                    <td>{{ style.name }}</td>
+                    <td>{{ style.createdAt ? style.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ style.updatedAt ? style.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <a href="{{ path('backoffice_style_show', {id:style.id}) }}" class="btn btn-dark my-2 my-sm-0 col-sd-1">Voir</a>
+                            <a href="{{ path('backoffice_style_edit', {id:style.id}) }}" class="btn btn-dark my-2 my-sm-0 col-sd-1">Modifier</a>                     
+                        </div>
+                    </td>
+                        
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="9">Aucun style trouvé</td>
+                </tr>
             {% endfor %}
-        </ul>
-    </main>
+        </tbody>
+    </table>
+
+    <a href="{{ path('backoffice_style_add') }}" class="btn btn-dark my-2 my-sm-0 col-sd-1">Ajouter</a>
 {% endblock %}
+

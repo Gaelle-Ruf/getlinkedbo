@@ -1,0 +1,4 @@
+<form method="post" action="{{ path('backoffice_adminuser_delete', {'id': adminuser.id}) }}" class="btn btn-dark my-2 my-sm-0 col-sd-1" onsubmit="return confirm('Voulez-vous supprimer cet événement ?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ adminuser.id) }}">
+    <button class="btn">Supprimer</button>
+</form>

@@ -17,8 +17,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class EventController extends AbstractController
 {
     /**
-    * @Route("/", name="index")
-    */
+     * @Route("/", name="index", methods={"GET"})
+     */
     public function index(EventRepository $eventRepository): Response
     {
         return $this->render('backoffice/event/index.html.twig', [
@@ -26,8 +26,7 @@ class EventController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="show")
-     * @return Response
+     * @Route("/{id}", name="show", methods={"GET"})
      */
     public function show(int $id, EventRepository $eventRepository)
     {
@@ -41,8 +40,7 @@ class EventController extends AbstractController
     }
 
     /**
-     * @Route("/add", name="add")
-     * @return Response
+     * @Route("/add", name="add", methods={"GET","POST"})
      */
     public function add(Request $request)
     {
@@ -62,32 +60,39 @@ class EventController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="edit")
-     * @return Response
+     * @Route("/{id}/edit", name="edit", methods={"GET","POST"})
      */
     public function edit(Event $event, Request $request)
     {
         $form = $this->createForm(EventType::class, $event);
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
-            $event->setUpdatedAt(new DateTimeImmutable());
+
+            $event->getName();/* setUpdatedAt(new DateTimeImmutable()) */
+
             $this->getDoctrine()->getManager()->flush();
-            $this->addFlash('success', 'L\événement ' . $event->getName() . ' a bien été modifiée');
-            return $this->redirectToRoute('backoffice_event_show', ['id' => $event->getId()]);
+
+            $this->addFlash('success', 'L\événement ' . $event->getName() . ' a bien été modifié');
+
+            return $this->redirectToRoute('backoffice_event_index', [], Response::HTTP_SEE_OTHER);
         }
-        return $this->render('backoffice/event/edit.html.twig', ['formView' => $form->createView()]);
+
+        return $this->renderForm('backoffice/event/edit.html.twig', [
+            'event' => $event,
+            'form' => $form
+        ]);
     }
 
     /**
-     * @Route("/{id}/delete", name="delete")
-     * @return Response
+     * @Route("/{id}/delete", name="delete", methods={"POST"})
      */
     public function delete(Event $event)
     {
         $em = $this->getDoctrine()->getManager();
         $em->remove($event);
         $em->flush();
-        $this->addFlash('info', 'L\événement ' . $event->getName() . ' a bien été supprimée');
+        $this->addFlash('info', 'L\événement ' . $event->getName() . ' a bien été supprimé');
         return $this->redirectToRoute('backoffice_event_index');
     }
 }

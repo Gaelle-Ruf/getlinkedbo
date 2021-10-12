@@ -1,20 +1,34 @@
-{% extends "backoffice/layout.html.twig" %}
+{% extends 'backoffice/layout.html.twig' %}
+
+{% block title %}Évaluations des événements
+{% endblock %}
 
 {% block content %}
+    <h1>Évaluation de : {{ comment.event.name }}</h1>
 
-    <h3>
-        Commentaire
-        {{ comment.name }}
-    </h3>
+    <table class="table">
+        <tbody>    
+            <tr>
+                <th>Note sur 5</th>
+                <td>{{ comment.rate }}</td>
+            </tr> 
+            <tr>
+                <th> l'événement</th>
+                <td>{{ comment.comment }}</td>
+            </tr>                        
+                <th>Créé le</th>
+                <td>{{ comment.createdAt ? comment.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Mis à jour le</th>
+                <td>{{ comment.updatedAt ? comment.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
 
-    <p>
-        <a href="{{ path('backoffice_comment_edit', {id:comment.id}) }}">Editer</a>
-        |
-        <a href="{{ path('backoffice_comment_delete', {id:comment.id}) }}" onclick="return confirm('Êtes-vous sur de vouloir effectuer cette action ?');">Supprimer</a>
-    </p>
+    <a href="{{ path('backoffice_comment_index') }}" class="btn btn-dark my-2 my-sm-0 col-sd-1">Retour à la liste</a>
 
-    <p>
-        <a href="{{ path('backoffice_comment_index') }}">Retour à la liste</a>
-    </p>
+    <a href="{{ path('backoffice_comment_edit', {'id': comment.id}) }}" class="btn btn-dark my-2 my-sm-0 col-sd-1">Modifier</a>
 
+    {{ include('backoffice/comment/_delete_form.html.twig') }}
 {% endblock %}

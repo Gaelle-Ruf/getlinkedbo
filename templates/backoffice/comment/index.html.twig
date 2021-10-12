@@ -1,23 +1,46 @@
 {% extends 'backoffice/layout.html.twig' %}
 
 {% block title %}
-    Commentaires
+    Évaluations -
+    {{parent()}}
 {% endblock %}
 
 {% block content %}
-    <main>
-        <h2>Commentaires</h2>
-        <p>
-            <a href="{{ path('backoffice_comment_add') }}">Ajouter</a>
-        </p>
-        <ul>
+<h1>Évaluations des événements</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Évenement</th>
+                <th>Note sur 5</th>
+                <th>Commentaire</th>              
+                
+            </tr>
+        </thead>
+        <tbody>
             {% for comment in comments %}
-                <li>
-                    <a href="{{ path('backoffice_comment_show', {id:comment.id}) }}">
-                        {{ comment.name }}
-                    </a>
-                </li>
+                <tr>
+                    <td>{{ comment.event.name }}</td>
+                    <td>{{ comment.rate }}</td>
+                    <td>{{ comment.comment }}</td>
+                    <td>{{ comment.createdAt ? comment.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ comment.updatedAt ? comment.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <a href="{{ path('backoffice_comment_show', {id:comment.id}) }}" class="btn btn-dark my-2 my-sm-0 col-sd-1">Voir</a>
+                            <a href="{{ path('backoffice_comment_edit', {id:comment.id}) }}" class="btn btn-dark my-2 my-sm-0 col-sd-1">Modifier</a>                     
+                        </div>
+                    </td>
+                        
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="9">Aucun commentaire trouvé</td>
+                </tr>
             {% endfor %}
-        </ul>
-    </main>
+        </tbody>
+    </table>
+
+    <a href="{{ path('backoffice_comment_add') }}" class="btn btn-dark my-2 my-sm-0 col-sd-1">Ajouter</a>
 {% endblock %}
+

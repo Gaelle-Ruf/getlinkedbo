@@ -1,15 +1,20 @@
-{% extends "backoffice/layout.html.twig" %}
+{% extends 'backoffice/layout.html.twig' %}
+
+{% block title %}Modifier un événement
+{% endblock %}
 
 {% block content %}
-
-    <h2>Edition d'un événement</h2>
-    {{ form_start(formView, {'attr': {'novalidate': 'novalidate'}}) }}
-    {{ form_row(formView.name, {'attr': {'class':'geronimo'}}) }}
-    <button class="btn btn-primary">Valider</button>
-    {{ form_end(formView) }}
+    <h1>Modifier un événement</h1>
 
     <p>
-        <a href="{{ path('backoffice_event_index') }}">Retour à la liste</a>
+        <a href="{{ path('backoffice_event_index', {id:event.id}) }}" class="btn btn-dark my-2 my-sm-0 col-sd-1">Tous les événements</a>
+        |
+        <a href="{{ path('backoffice_event_add', {id:event.id}) }}" class="btn btn-dark my-2 my-sm-0 col-sd-1">Ajouter un événement</a>
     </p>
 
+    {{ include('backoffice/event/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('backoffice_event_index') }}">Retour à la liste</a>
+
+    {{ include('backoffice/event/_delete_form.html.twig') }}
 {% endblock %}
