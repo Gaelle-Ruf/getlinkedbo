@@ -1,7 +1,7 @@
 <header>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-5">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">GetLinked</a>
+      <a class="navbar-brand" href="{{path('backoffice_index')}}">GetLinked<img src="https://img.icons8.com/color-glass/48/000000/playlist.png"/></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -37,10 +37,21 @@
         </ul>
         {% if app.user %}
           <li class="nav-item dropdown dropright">
+<<<<<<< HEAD
             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="{{ path('app_login') }}" role="button" aria-haspopup="true" aria-expanded="false">{# {{ app.adminuser.firstname }} #} Profil</a>
             <div class="dropdown-menu">
              
               <a class="dropdown-item" href="{{path('app_logout')}}">Déconnexion</a>
+=======
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+              {{ app.user.firstname }}
+            </a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="{# {{path('backoffice_adminuser_show', {'id': adminuser.id}) }} #}">Mon profil</a>
+              <a class="dropdown-item" href="{# {{path('backoffice_adminuser_index')}} #}">Administrateurs du site</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{# {{path('app_logout')}} #}">Déconnexion</a>
+>>>>>>> feature/BO-modelization
             </div>
           </li>
         {% else %}
@@ -48,7 +59,15 @@
               <a class="btn btn-dark my-2 my-sm-0 col-sd-1" aria-current="page" href="{{ path('app_login') }}">Se connecter</a>
             </li>
         {% endif %}
+<<<<<<< HEAD
       
+=======
+        {# barre de recherche
+        <form class="d-flex">
+          <input class="form-control me-sm-2" type="text" placeholder="Tapez votre recherche ici">
+          <button class="btn btn-dark my-2 my-sm-0" type="submit">Rechercher</button>
+        </form> #}
+>>>>>>> feature/BO-modelization
       </div>
     </div>
   </nav>
