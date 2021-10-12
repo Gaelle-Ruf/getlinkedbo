@@ -70,11 +70,21 @@ class UserController extends AbstractController
     public function home(UserRepository $userRepository): Response
     {
        
-        // we get the 4 last users created
-        $latestUsers = $userRepository->findBy([], ['id' => 'DESC'], 4);
+        $latestArtist = $userRepository->findByArtist(
+            ['type' => 'artiste'],
+            ['id' => 'DESC'],
+            $limit = 4,
+            $offset = null,
+        );
+
+        /* return $this->render('backoffice/home.html.twig', [
+            'latestArtists' => $latestArtist,
+            'limit' => $limit,
+            'offset' => $offset,
+        ]); */
 
         // dd ($latestUsers);
-        return $this->json($latestUsers, 200, [], ['groups' => 'users_list']);
+        return $this->json($latestArtist, 200, [], ['groups' => 'users_list']);
 
     }
 

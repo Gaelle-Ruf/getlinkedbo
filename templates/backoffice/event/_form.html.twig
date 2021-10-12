@@ -1,8 +1,5 @@
-{% extends "backoffice/layout.html.twig" %}
-
 {% block body %}
 
-    <h2>Modification d'un événement</h2>
     {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
         {{ form_row(form.name, {'attr': {'class':'geronimo'}}) }}
     {{ form_end(form) }}
