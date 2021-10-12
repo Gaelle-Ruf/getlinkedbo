@@ -19,9 +19,9 @@
     </head>
     <body>
         {% set currentRoute = app.request.get('_route') %}
-        {% include "partials/_nav.html.twig" %}
+        {% include "partials/_nav.html.twig" %} {# header #}
 
-        {# {% include "partials/_flash.html.twig" %} #}
+        {% include "partials/_flash.html.twig" %} 
 
         {% block body %}{% endblock %}
 
