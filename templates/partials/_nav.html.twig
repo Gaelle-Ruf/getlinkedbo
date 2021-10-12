@@ -26,10 +26,6 @@
           <li class="nav-item">
             <a class="nav-link" href="{# {{path('backoffice_user_index')}} #}">Organisateurs</a>
             
-
-
-
-
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{path('backoffice_style_index')}}">Styles de musique</a>
@@ -39,25 +35,20 @@
           </li>
           
         </ul>
-        {# {% if app.adminuser %} #}
+        {% if app.user %}
           <li class="nav-item dropdown dropright">
-            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{# {{ app.adminuser.firstname }} #} Profil</a>
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="{{ path('app_login') }}" role="button" aria-haspopup="true" aria-expanded="false">{# {{ app.adminuser.firstname }} #} Profil</a>
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="{# {{path('backoffice_adminuser_show', {'id': adminuser.id}) }}">Mon profil</a>
-              <a class="dropdown-item" href="{{path('backoffice_adminuser_index')}}">Administrateurs du site</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="{# {{path('app_logout')}} #}">Déconnexion</a>
+             
+              <a class="dropdown-item" href="{{path('app_logout')}}">Déconnexion</a>
             </div>
           </li>
-        {# {% else %} #}
+        {% else %}
             <li class="nav-item">
-              <a class="btn btn-dark my-2 my-sm-0 col-sd-1" aria-current="page" href="{# {{ path('app_login') }} #}">Se connecter</a>
+              <a class="btn btn-dark my-2 my-sm-0 col-sd-1" aria-current="page" href="{{ path('app_login') }}">Se connecter</a>
             </li>
-        {# {% endif %} #}
-        {# <form class="d-flex">
-          <input class="form-control me-sm-2" type="text" placeholder="Tapez votre recherche ici">
-          <button class="btn btn-dark my-2 my-sm-0" type="submit">Rechercher</button>
-        </form> #}
+        {% endif %}
+      
       </div>
     </div>
   </nav>
