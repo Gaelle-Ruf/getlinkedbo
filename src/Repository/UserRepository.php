@@ -19,27 +19,7 @@ class UserRepository extends ServiceEntityRepository
         parent::__construct($registry, User::class);
     }
 
-    /**
-     * Effectue une recherche de user en fonction de la variable
-     * $type
-     * 
-     * Version : Query builder
-     *
-     * @param $type
-     * @return User[]
-     */
-    public function searchUserByTypeDQL($type)
-    {
-         // https://www.doctrine-project.org/projects/doctrine-orm/en/2.9/reference/query-builder.html
-         return $this->createQueryBuilder('user')
-            // Clause WHERE pour filtre en fonction de $type
-            ->where('user.type LIKE :type')
-            ->setParameter(':type', "%$type%")
-            ->getQuery()
-            ->getResult();
-    }
-
-
+    
     // /**
     //  * @return User[] Returns an array of User objects
     //  */
