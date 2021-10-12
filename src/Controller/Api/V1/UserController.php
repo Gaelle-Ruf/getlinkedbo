@@ -37,6 +37,30 @@ class UserController extends AbstractController
     );
     }
 
+
+
+    /**
+     * @Route("/latestArtits", name="latestArtits", methods={"GET"})
+     */
+    public function latestArtist(UserRepository $userRepository): Response
+    {
+        
+        $latestArtist = $userRepository->findByType(
+            array('type' => 'artiste'),
+            array('id' => 'DESC'),
+            $myLimit = 4,
+            $myOffset = null);
+
+        return $this->json($latestArtist, 200, [], ['groups' => 'user_detail']);
+
+        /* return $this->render('backoffice/home.html.twig', [
+            'latestArtists' => $latestArtist,
+            'limit' => $myLimit,
+            'offset' => $myOffset
+        ]); */
+
+    }
+
     /**
      * URL : /api/v1/users/home
      * Route : api_v1_user_home
