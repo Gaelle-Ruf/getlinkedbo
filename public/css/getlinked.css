@@ -116,3 +116,7 @@ form {
 body {
     min-height: 100vh;
 }
+
+.login {
+    width: 50%;
+}

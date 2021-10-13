@@ -3,7 +3,7 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
-<form method="post">
+<form method="post" class="login">
 
     <h1 class="h3 mb-3 font-weight-normal">Veuillez vous identifier</h1>
     <label for="inputEmail">Email</label>
@@ -14,8 +14,8 @@
     <input type="hidden" name="_csrf_token"
            value="{{ csrf_token('authenticate') }}">
 
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
+    <button class="btn btn-dark my-2 my-sm-0 col-sd-1" type="submit">
+        Se connecter
     </button>
 </form>
 {% endblock %}
