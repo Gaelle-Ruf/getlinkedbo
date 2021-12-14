@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ParticipationRepository;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -48,6 +49,14 @@ class Participation
      * @Groups({"events_list", "event_detail"})
      */
     private $user;
+
+
+    public function __construct()
+    {
+        $this->createdAt = new DateTimeImmutable();
+        $this->updatedAt = new DateTimeImmutable();
+        
+    }
 
     public function getId(): ?int
     {

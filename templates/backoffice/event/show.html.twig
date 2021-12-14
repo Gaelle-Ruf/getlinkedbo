@@ -1,20 +1,49 @@
-{% extends "backoffice/layout.html.twig" %}
+{% extends 'backoffice/layout.html.twig' %}
+
+{% block title %}Événements
+{% endblock %}
 
 {% block content %}
+    <h1>Fiche de l'événement "{{ event.name }}"</h1>
 
-    <h3>
-        Événement
-        {{ event.name }}
-    </h3>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ event.id }}</td>
+            </tr>        
+            <tr>
+                <th>Lieu</th>
+                <td>{{ event.address }}</td>
+            </tr>
+            <tr>
+                <th>Visuel</th>
+                <td>                        
+                    <img src="{{ event.picture }}" width="100">
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ event.description }}</td>
+            </tr>
+            <tr>
+                <th>Contact</th>
+                <td>{{ event.email }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ event.createdAt ? event.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>UpdatedAt</th>
+                <td>{{ event.updatedAt ? event.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
 
-    <p>
-        <a href="{{ path('backoffice_event_edit', {id:event.id}) }}">Editer</a>
-        |
-        <a href="{{ path('backoffice_event_delete', {id:event.id}) }}" onclick="return confirm('Êtes-vous sur de vouloir effectuer cette action ?');">Supprimer</a>
-    </p>
+    <a href="{{ path('backoffice_event_index') }}" class="btn btn-dark my-2 my-sm-0 col-sd-1">Retour à la liste</a>
 
-    <p>
-        <a href="{{ path('backoffice_event_index') }}">Retour à la liste</a>
-    </p>
+    <a href="{{ path('backoffice_event_edit', {'id': event.id}) }}" class="btn btn-dark my-2 my-sm-0 col-sd-1">Modifier</a>
 
+    {{ include('backoffice/event/_delete_form.html.twig') }}
 {% endblock %}

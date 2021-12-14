@@ -1,0 +1,13 @@
+{% block body %}
+
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+        {{ form_row(form.firstname, {'attr': {'class':'geronimo'}}) }}
+        {{ form_row(form.lastname, {'attr': {'class':'geronimo'}}) }}
+    {{ form_end(form) }}
+    <button class="btn btn-dark my-2 my-sm-0 col-sd-1">Valider</button>
+
+    <p>
+        <a href="{{ path('backoffice_user_index') }}" class="btn btn-dark my-2 my-sm-0 col-sd-1">Retour à la liste</a>
+    </p>
+
+{% endblock %}

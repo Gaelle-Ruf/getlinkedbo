@@ -17,23 +17,22 @@ use Symfony\Component\Routing\Annotation\Route;
 class CategoryController extends AbstractController
 {
     /**
-    * @Route("/", name="index")
-    */
+     * @Route("/", name="index", methods={"GET"})
+     */
     public function index(CategoryRepository $categoryRepository): Response
     {
         return $this->render('backoffice/category/index.html.twig', [
-            'categories' => $categoryRepository->findAll(),]);
+            'categorys' => $categoryRepository->findAll(),]);
     }
 
     /**
-     * @Route("/{id}", name="show")
-     * @return Response
+     * @Route("/{id}", name="show", methods={"GET"})
      */
     public function show(int $id, CategoryRepository $categoryRepository)
     {
         $category = $categoryRepository->find($id);
         if (!$category) {
-            throw $this->createNotFoundException('La catégorie ' . $id . ' n\'existe pas');
+            throw $this->createNotFoundException('La categorie ' . $id . ' n\'existe pas');
         }
         return $this->render('backoffice/category/show.html.twig', [
             'category' => $category
@@ -41,19 +40,21 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @Route("/add", name="add")
-     * @return Response
+     * @Route("/add", name="add", methods={"GET","POST"})
      */
     public function add(Request $request)
     {
         $category = new Category();
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($category);
             $em->flush();
-            $this->addFlash('success', 'La catégorie ' . $category->getName() . ' a bien été créée');
+            $this->addFlash('success', 'L\'événement ' . $category->getName() . ' a bien été créée');
+
             return $this->redirectToRoute('backoffice_category_index');
         }
         return $this->render('backoffice/category/add.html.twig', [
@@ -62,32 +63,39 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="edit")
-     * @return Response
+     * @Route("/{id}/edit", name="edit", methods={"GET","POST"})
      */
     public function edit(Category $category, Request $request)
     {
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
-            $category->setUpdatedAt(new DateTimeImmutable());
+
+            $category->getName();/* setUpdatedAt(new DateTimeImmutable()) */
+
             $this->getDoctrine()->getManager()->flush();
-            $this->addFlash('success', 'La catégorie ' . $category->getName() . ' a bien été modifiée');
-            return $this->redirectToRoute('backoffice_category_show', ['id' => $category->getId()]);
+
+            $this->addFlash('success', 'L\événement ' . $category->getName() . ' a bien été modifié');
+
+            return $this->redirectToRoute('backoffice_category_index', [], Response::HTTP_SEE_OTHER);
         }
-        return $this->render('backoffice/category/edit.html.twig', ['formView' => $form->createView()]);
+
+        return $this->renderForm('backoffice/category/edit.html.twig', [
+            'category' => $category,
+            'form' => $form
+        ]);
     }
 
     /**
-     * @Route("/{id}/delete", name="delete")
-     * @return Response
+     * @Route("/{id}/delete", name="delete", methods={"POST"})
      */
     public function delete(Category $category)
     {
         $em = $this->getDoctrine()->getManager();
         $em->remove($category);
         $em->flush();
-        $this->addFlash('info', 'La catégorie ' . $category->getName() . ' a bien été supprimée');
+        $this->addFlash('info', 'L\événement ' . $category->getName() . ' a bien été supprimé');
         return $this->redirectToRoute('backoffice_category_index');
     }
 }

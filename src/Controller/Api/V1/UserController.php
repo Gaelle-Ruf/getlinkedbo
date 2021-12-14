@@ -3,11 +3,6 @@
 namespace App\Controller\Api\V1;
 
 use App\Entity\User;
-use App\Repository\CategoryRepository;
-use App\Repository\CommentRepository;
-use App\Repository\EventRepository;
-use App\Repository\ParticipationRepository;
-use App\Repository\StyleRepository;
 use App\Repository\UserRepository;
 use Swift_Mailer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -40,6 +35,57 @@ class UserController extends AbstractController
         // dd($users);
         return $this->json($users, 200, [], ['groups' => 'users_list']
     );
+    }
+
+
+
+    /**
+     * @Route("/latestArtits", name="latestArtits", methods={"GET"})
+     */
+    public function latestArtist(UserRepository $userRepository): Response
+    {
+        
+        $latestArtist = $userRepository->findByType(
+            array('type' => 'artiste'),
+            array('id' => 'DESC'),
+            $myLimit = 4,
+            $myOffset = null);
+
+        return $this->json($latestArtist, 200, [], ['groups' => 'user_detail']);
+
+        /* return $this->render('backoffice/home.html.twig', [
+            'latestArtists' => $latestArtist,
+            'limit' => $myLimit,
+            'offset' => $myOffset
+        ]); */
+
+    }
+
+    /**
+     * URL : /api/v1/users/home
+     * Route : api_v1_user_home
+     * 
+     * @Route("/home", name="home", methods={"GET"})
+     */
+    public function home(UserRepository $userRepository): Response
+    {
+       
+        $latestArtist = $userRepository->findByArtist(
+            ['type' => 'artiste'],
+            ['id' => 'DESC'],
+            $limit = 4,
+            $offset = null,
+        );
+
+        /* return $this->render('backoffice/home.html.twig', [
+            'latestArtists' => $latestArtist,
+            'limit' => $limit,
+            'offset' => $offset,
+        ]); */
+
+        // dd ($latestUsers);
+        return $this->json($latestArtist, 200, [], ['groups' => 'users_list']);
+
     }
 
     /**
@@ -81,14 +127,13 @@ class UserController extends AbstractController
 
         //We turn json data in object
         $user = $serialiser->deserialize($jsonData, User::class, 'json');       
-        /* dd($user); */
+        // dd($user);
         $user->setPassword(
             $passwordEncoder->hashPassword(
                 $user,
                 $user->getPassword()
             )
         );
-
         
 
         //To save we call the manager
@@ -145,9 +190,9 @@ class UserController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $em->flush();
 
-        return $this->json([
+        return $this->json($user, 200, [
             'message' => 'L\'utilisateur ' . $user->getName() . ' a bien été mise à jour'
-        ]);
+        ], ['groups' => 'user_detail']);
     }
 
     /**

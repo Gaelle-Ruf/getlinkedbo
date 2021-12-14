@@ -5,8 +5,8 @@
     {{parent()}}
 {% endblock %}
 
-{% block body %}
-<h1>Liste des administrateurs du Backoffice -</h1>
+{% block content %}
+<h1>Tous les administrateurs du Backoffice </h1>
 
     <table class="table">
         <thead>
@@ -18,7 +18,6 @@
                 <th>Nom</th>
                 <th>Création le</th>
                 <th>Mis à jour le</th>
-                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -32,8 +31,8 @@
                     <td>{{ adminuser.createdAt ? adminuser.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                     <td>{{ adminuser.updatedAt ? adminuser.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                     <td>
-                        <a href="{{ path('backoffice_admin_user_show', {'id': adminuser.id}) }}">Voir le détail</a>
-                        <a href="{# {{ path('backoffice_admin_user_edit', {'id': adminuser.id}) }} #}">Modifier le profil</a>
+                        <a href="{{ path('backoffice_adminuser_show', {'id': adminuser.id}) }}" class="btn btn-dark my-2 my-sm-0 col-sd-1">Voir le détail</a>
+                        <a href="{{ path('backoffice_adminuser_edit', {'id': adminuser.id}) }}" class="btn btn-dark my-2 my-sm-0 col-sd-1">Modifier le profil</a>
                     </td>
                 </tr>
             {% else %}
@@ -44,5 +43,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('backoffice_admin_user_new') }} #}">Ajouter</a>
+    <a href="{{ path('backoffice_adminuser_add') }}" class="btn btn-dark my-2 my-sm-0 col-sd-1">Ajouter</a>
 {% endblock %}

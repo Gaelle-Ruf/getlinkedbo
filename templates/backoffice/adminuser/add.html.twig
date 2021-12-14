@@ -1,0 +1,15 @@
+{% extends "backoffice/layout.html.twig" %}
+
+{% block content %}
+
+    <h2>Ajout d'un administrateur</h2>
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+    {{ form_row(form.name, {'attr': {'class':'geronimo'}}) }}
+    <button class="btn btn-primary">Valider</button>
+    {{ form_end(form) }}
+
+    <p>
+        <a href="{{ path('backoffice_adminuser_index') }}" class="btn btn-dark my-2 my-sm-0 col-sd-1">Retour à la liste</a>
+    </p>
+
+{% endblock %}

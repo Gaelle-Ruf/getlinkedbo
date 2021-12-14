@@ -1,0 +1,64 @@
+{% extends 'backoffice/layout.html.twig' %}
+
+{% block title %}
+    Linkers -
+    {{parent()}}
+{% endblock %}
+
+{% block content %}
+<h1>Tous les Artistes</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom de scène</th>
+                <th>Avatar</th>
+                <th>Style de musique</th>
+                <th>Membres du groupe</th>
+                <th>Bio</th>
+                <th>Contact</th>
+                <th>Référent</th>
+                <th>Facebook</th> 
+                <th>Instagram</th>    
+                <th>Twitter</th>                          
+                <th>Linker depuis le</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for artist in artists %}
+                <tr>
+                    <td>{{ artist.id }}</td>
+                    <td>{{ artist.name }}</td>
+                    <td>                        
+                        <img src="{{ artist.picture }}" width="100">
+                    </td>
+                    {# <td>{{ artist.style }}</td> #}
+                    <td>{{ artist.nbMembers }}</td>
+                    <td>{{ artist.description  | u.truncate(50, '...') }}</td>
+                    <td>{{ artist.email }}</td>
+                    <td>{{ artist.firstname }}</td> 
+                    <td>{{ artist.lastname }}</td> 
+                    <td>{{ artist.facebook }}</td>         
+                    <td>{{ artist.instagram }}</td> 
+                    <td>{{ artist.twitter }}</td>      
+                    <td>{{ artist.createdAt ? artist.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                    {# <td>{{ artist.updatedAt ? artist.updatedAt|date('Y-m-d H:i:s') : '' }}</td> #}
+                    <td>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <a href class="btn btn-dark my-2 my-sm-0 col-sd-1""{{ path('backoffice_user_show', {'id': artist.id}) }}">Voir</a>
+                        {# <a href class="btn btn-dark my-2 my-sm-0 col-sd-1""{{ path('backoffice_user_edit', {'id': artist.id}) }}">Modifier</a> #}
+                    </div>
+                    </td>
+                        
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="9">Aucun artiste trouvé</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('backoffice_user_add') }}">Ajouter</a>
+{% endblock %}

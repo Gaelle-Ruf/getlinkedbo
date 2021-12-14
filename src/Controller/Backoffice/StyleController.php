@@ -17,8 +17,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class StyleController extends AbstractController
 {
     /**
-    * @Route("/", name="index")
-    */
+     * @Route("/", name="index", methods={"GET"})
+     */
     public function index(StyleRepository $styleRepository): Response
     {
         return $this->render('backoffice/style/index.html.twig', [
@@ -26,8 +26,7 @@ class StyleController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="show")
-     * @return Response
+     * @Route("/{id}", name="show", methods={"GET"})
      */
     public function show(int $id, StyleRepository $styleRepository)
     {
@@ -41,8 +40,7 @@ class StyleController extends AbstractController
     }
 
     /**
-     * @Route("/add", name="add")
-     * @return Response
+     * @Route("/add", name="add", methods={"GET","POST"})
      */
     public function add(Request $request)
     {
@@ -53,7 +51,7 @@ class StyleController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($style);
             $em->flush();
-            $this->addFlash('success', 'Le style ' . $style->getName() . ' a bien été créée');
+            $this->addFlash('success', 'L\'événement ' . $style->getName() . ' a bien été créée');
             return $this->redirectToRoute('backoffice_style_index');
         }
         return $this->render('backoffice/style/add.html.twig', [
@@ -62,32 +60,39 @@ class StyleController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="edit")
-     * @return Response
+     * @Route("/{id}/edit", name="edit", methods={"GET","POST"})
      */
     public function edit(Style $style, Request $request)
     {
         $form = $this->createForm(StyleType::class, $style);
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
-            $style->setUpdatedAt(new DateTimeImmutable());
+
+            $style->getName();/* setUpdatedAt(new DateTimeImmutable()) */
+
             $this->getDoctrine()->getManager()->flush();
-            $this->addFlash('success', 'Le style ' . $style->getName() . ' a bien été modifiée');
-            return $this->redirectToRoute('backoffice_style_show', ['id' => $style->getId()]);
+
+            $this->addFlash('success', 'L\événement ' . $style->getName() . ' a bien été modifié');
+
+            return $this->redirectToRoute('backoffice_style_index', [], Response::HTTP_SEE_OTHER);
         }
-        return $this->render('backoffice/style/edit.html.twig', ['formView' => $form->createView()]);
+
+        return $this->renderForm('backoffice/style/edit.html.twig', [
+            'style' => $style,
+            'form' => $form
+        ]);
     }
 
     /**
-     * @Route("/{id}/delete", name="delete")
-     * @return Response
+     * @Route("/{id}/delete", name="delete", methods={"POST"})
      */
     public function delete(Style $style)
     {
         $em = $this->getDoctrine()->getManager();
         $em->remove($style);
         $em->flush();
-        $this->addFlash('info', 'Le style ' . $style->getName() . ' a bien été supprimée');
+        $this->addFlash('info', 'L\événement ' . $style->getName() . ' a bien été supprimé');
         return $this->redirectToRoute('backoffice_style_index');
     }
 }

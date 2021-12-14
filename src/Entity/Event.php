@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\EventRepository;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -116,6 +117,7 @@ class Event
     private $updatedAt;
 
     /**
+     * 
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="events", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      * 
@@ -158,6 +160,16 @@ class Event
         $this->style = new ArrayCollection();
         $this->comment = new ArrayCollection();
         $this->participation = new ArrayCollection();
+
+        $this->createdAt = new DateTimeImmutable();
+        $this->updatedAt = new DateTimeImmutable();
+        $this->publishedAt = new DateTimeImmutable();
+    }
+
+    public function __toString() {
+
+        return $this->id . ' - ' . $this->name;
+
     }
 
     public function getId(): ?int

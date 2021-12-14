@@ -17,8 +17,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class CommentController extends AbstractController
 {
     /**
-    * @Route("/", name="index")
-    */
+     * @Route("/", name="index", methods={"GET"})
+     */
     public function index(CommentRepository $commentRepository): Response
     {
         return $this->render('backoffice/comment/index.html.twig', [
@@ -26,14 +26,13 @@ class CommentController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="show")
-     * @return Response
+     * @Route("/{id}", name="show", methods={"GET"})
      */
     public function show(int $id, CommentRepository $commentRepository)
     {
         $comment = $commentRepository->find($id);
         if (!$comment) {
-            throw $this->createNotFoundException('Le commentaire ' . $id . ' n\'existe pas');
+            throw $this->createNotFoundException('Le commentaire n\'existe pas');
         }
         return $this->render('backoffice/comment/show.html.twig', [
             'comment' => $comment
@@ -41,8 +40,7 @@ class CommentController extends AbstractController
     }
 
     /**
-     * @Route("/add", name="add")
-     * @return Response
+     * @Route("/add", name="add", methods={"GET","POST"})
      */
     public function add(Request $request)
     {
@@ -53,7 +51,7 @@ class CommentController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($comment);
             $em->flush();
-            $this->addFlash('success', 'Le commentaire ' . $comment->getName() . ' a bien été créée');
+            $this->addFlash('success', 'Le commentaire a bien été créé');
             return $this->redirectToRoute('backoffice_comment_index');
         }
         return $this->render('backoffice/comment/add.html.twig', [
@@ -62,32 +60,39 @@ class CommentController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="edit")
-     * @return Response
+     * @Route("/{id}/edit", name="edit", methods={"GET","POST"})
      */
     public function edit(Comment $comment, Request $request)
     {
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
-            $comment->setUpdatedAt(new DateTimeImmutable());
+
+            $comment->getComment();/* setUpdatedAt(new DateTimeImmutable()) */
+
             $this->getDoctrine()->getManager()->flush();
-            $this->addFlash('success', 'Le commentaire ' . $comment->getName() . ' a bien été modifiée');
-            return $this->redirectToRoute('backoffice_comment_show', ['id' => $comment->getId()]);
+
+            $this->addFlash('success', 'Le commentaire a bien été modifié');
+
+            return $this->redirectToRoute('backoffice_comment_index', [], Response::HTTP_SEE_OTHER);
         }
-        return $this->render('backoffice/comment/edit.html.twig', ['formView' => $form->createView()]);
+
+        return $this->renderForm('backoffice/comment/edit.html.twig', [
+            'comment' => $comment,
+            'form' => $form
+        ]);
     }
 
     /**
-     * @Route("/{id}/delete", name="delete")
-     * @return Response
+     * @Route("/{id}/delete", name="delete", methods={"POST"})
      */
     public function delete(Comment $comment)
     {
         $em = $this->getDoctrine()->getManager();
         $em->remove($comment);
         $em->flush();
-        $this->addFlash('info', 'Le commentaire ' . $comment->getName() . ' a bien été supprimée');
+        $this->addFlash('info', 'Le commentaire a bien été supprimé');
         return $this->redirectToRoute('backoffice_comment_index');
     }
 }

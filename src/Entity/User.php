@@ -205,8 +205,16 @@ class User implements UserInterface
         $this->style = new ArrayCollection();
         $this->comment = new ArrayCollection();
         $this->participation = new ArrayCollection();
+
+        $this->createdAt = new DateTimeImmutable();
+        $this->updatedAt = new DateTimeImmutable();
     }
 
+    public function __toString() {
+
+        return $this->firstname . ' ' . $this->lastname;
+
+    }
 
     public function getRoles(): array 
     { return array('ROLE_USER');}
